@@ -3,15 +3,19 @@ import varieties.groups.PackAnimal;
 
 public class Horse extends PackAnimal {
     public String horseCommands;
-    Horse() {
+    public Horse() {
         super();
     }
-    public void setHorseCommands(String commands) {
+    @Override
+    public void setCommands(String commands) {
         this.horseCommands = commands;
+    }
+    public void addCommand(String newCommand) {
+        this.horseCommands += " " + newCommand;
         return;
     }
-    public void addHorseCommand(String command) {
-        this.horseCommands += command;
-        return;
+    @Override
+    public String toString() {
+        return super.toString() + " " + horseCommands;
     }
 }

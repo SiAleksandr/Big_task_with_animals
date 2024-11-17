@@ -7,4 +7,8 @@ public abstract class Pet extends Animal{
         super();
         super.groupId = 0;
     }
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

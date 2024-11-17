@@ -7,4 +7,8 @@ public abstract class PackAnimal extends Animal {
         super();
         super.groupId = 1;
     }
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
