@@ -16,6 +16,8 @@ public class Main {
         System.out.println(list.get(0).toString());
         list.get(1).setCommands("голопом стой");
         System.out.println(list.get(1).toString());
+        List<Animal> empty = new ArrayList<>();
+        if (empty.size() == 0) System.out.println("empty пуст!");
         // cat1.setCommands("сидеть мяукать");
         // cat1.addComand("лежать");
         // horse1.setCommands("голопом стой");

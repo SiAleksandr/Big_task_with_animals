@@ -17,6 +17,9 @@ public abstract class Animal {
     }
     public void setCommands(String commands) {};
     public String toString() {
+        // Нужна переменная, в которую будут сохраняться
+        // испорченные данные и если она не равна null, то
+        // вернётся она, а не то, что тут сейчас указано
         return groupName + " " + birthDate + " " + type + " " + groupId;
     }
 }
