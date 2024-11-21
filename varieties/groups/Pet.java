@@ -10,13 +10,14 @@ public abstract class Pet extends Animal{
         super(type);
     }
 
-    public void getGroupId(ArrayList<String> pets, int petGroupId) {
+    public void setGroupId(ArrayList<String> pets, int petGroupId) {
         int i = 0;
         while (i < pets.size()) {
             if (type == pets.get(i)) {
                 groupId = petGroupId;
                 i = pets.size(); // Чтобы завершить цикл
             }
+            else i++;
         }
     }
 

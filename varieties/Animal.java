@@ -17,15 +17,12 @@ public abstract class Animal {
         this.type = type;
     }
 
-    public void getGroup(HashMap<String, String> accordance) {
+    public void setGroup(HashMap<String, String> accordance) {
         groupName = accordance.get(type);
     }
 
     public void setCommands(String commands) {};
     public String toString() {
-        // Нужна переменная, в которую будут сохраняться
-        // испорченные данные и если она не равна null, то
-        // вернётся она, а не то, что тут сейчас указано
         return type + " " + groupName + " " + groupId + " " + birthDate;
     }
 }
