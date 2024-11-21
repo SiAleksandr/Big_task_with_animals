@@ -3,8 +3,8 @@ import varieties.groups.Pet;
 
 public class Cat extends Pet {
     public String catCommands;
-    public Cat() {
-        super();
+    public Cat(String type) {
+        super(type);
     }
     @Override
     public void setCommands(String commands) {

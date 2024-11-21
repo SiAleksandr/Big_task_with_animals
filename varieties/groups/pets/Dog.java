@@ -3,8 +3,8 @@ import varieties.groups.Pet;
 
 public class Dog extends Pet {
     public String dogCommands;
-    Dog() {
-        super();
+    public Dog(String type) {
+        super(type);
     }
     public void setDogCommands(String dogCommands) {
         this.dogCommands = dogCommands;

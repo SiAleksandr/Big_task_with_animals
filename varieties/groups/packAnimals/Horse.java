@@ -3,8 +3,8 @@ import varieties.groups.PackAnimal;
 
 public class Horse extends PackAnimal {
     public String horseCommands;
-    public Horse() {
-        super();
+    public Horse(String type) {
+        super(type);
     }
     @Override
     public void setCommands(String commands) {

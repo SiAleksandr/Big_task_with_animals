@@ -21,8 +21,8 @@ public class DBTranslator {
         br.close();
         return linesList;
     }
-    public void writeFile(ArrayList<String> list) throws IOException {
-        FileWriter fw = new FileWriter(this.fileName, false);
+    public void writeFile(ArrayList<String> list, boolean continuation) throws IOException {
+        FileWriter fw = new FileWriter(this.fileName, continuation);
         for (String line: list) {
             line += '\n';
             fw.write(line);

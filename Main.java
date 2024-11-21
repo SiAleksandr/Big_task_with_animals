@@ -7,17 +7,13 @@ import java.util.ArrayList;;
 
 public class Main {
     public static void main(String[] args) {
-        Cat cat1 = new Cat();
-        Horse horse1 = new Horse();
-        List<Animal> list = new ArrayList<>();
-        list.add(cat1);
-        list.add(horse1);
-        list.get(0).setCommands("сидеть мяукать");
-        System.out.println(list.get(0).toString());
-        list.get(1).setCommands("голопом стой");
-        System.out.println(list.get(1).toString());
-        List<Animal> empty = new ArrayList<>();
-        if (empty.size() == 0) System.out.println("empty пуст!");
+
+        ArrayList<Animal> allTypes = getTypes();
+        String cat = "cat";
+        Animal animal = getAnimal(allTypes, cat);
+        animal.setCommands("Прыгать сидеть");
+        System.out.println(animal.toString());
+
         // cat1.setCommands("сидеть мяукать");
         // cat1.addComand("лежать");
         // horse1.setCommands("голопом стой");
@@ -25,5 +21,25 @@ public class Main {
         // cat1.setType("Кошка");
         // System.out.println(cat1.toString());
         // System.out.println(horse1.toString());
+    }
+
+    protected static ArrayList<Animal> getTypes() {
+        ArrayList<Animal> allTypes = new ArrayList<>();
+        allTypes.add(new Hamster("dog"));
+        allTypes.add(new Dog("hamster"));
+        allTypes.add(new Cat("cat"));
+        return allTypes;
+    }
+    protected static Animal getAnimal(ArrayList<Animal> types, String dog) {
+        int target = 0;
+        int i = 0;
+        while (i < types.size()) {
+            if (types.get(i).type.equals(dog)) {
+                target = i;
+                i = types.size(); // Чтобы выйти из цикла
+            }
+            else i++;
+        }
+        return types.get(target);
     }
 }
