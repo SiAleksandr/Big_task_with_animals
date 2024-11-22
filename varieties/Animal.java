@@ -1,18 +1,16 @@
 package varieties;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Animal {
-    public static int groupId;
+    public Integer groupId;
     public String groupName;
     public String type;
     public String name;
     public String owner;
-    public static LocalDate birthDate;
-    static {
-        groupId = 0;
-        birthDate = LocalDate.of(2005, 11, 25);
-    }
+    public LocalDate birthDate;
+
     public Animal(String type) {
         this.type = type;
     }
@@ -21,7 +19,24 @@ public abstract class Animal {
         groupName = accordance.get(type);
     }
 
-    public void setCommands(String commands) {};
+    public void setGroupId(HashMap<String, Integer> groups) {
+        groupId = groups.get(groupName);
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public void setId(Integer id) {}
+
+    public void setCommands(String commands) {}
+
+    public void addCommand(String command) {}
+
     public String toString() {
         return type + " " + groupName + " " + groupId + " " + birthDate;
     }

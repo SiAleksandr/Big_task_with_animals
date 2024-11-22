@@ -1,17 +1,21 @@
 package varieties.groups.pets;
+
 import varieties.groups.Pet;
 
 public class Hamster extends Pet {
     public String hamsterCommands;
+    
     public Hamster(String type) {
         super(type);
     }
-    public void setHamsterComands(String commands) {
-        this.hamsterCommands = commands;
-        return;
+
+    @Override
+    public void setCommands(String commands) {
+        hamsterCommands = commands;
     }
-    public void addHamsterCommand(String command) {
-        this.hamsterCommands += command;
-        return;
+
+    @Override
+    public void addCommand(String command) {
+        hamsterCommands += " " + command;
     }
 }

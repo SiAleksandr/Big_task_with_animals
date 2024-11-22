@@ -1,18 +1,22 @@
 package varieties.groups.pets;
+
 import varieties.groups.Pet;
 
 public class Cat extends Pet {
     public String catCommands;
+
     public Cat(String type) {
         super(type);
     }
+    
     @Override
     public void setCommands(String commands) {
-        this.catCommands = commands;
+        catCommands = commands;
     }
-    public void addComand (String newCommand) {
-        this.catCommands += " " + newCommand;
-        return;
+
+    @Override
+    public void addCommand (String newCommand) {
+        catCommands += " " + newCommand;
     }
     @Override
     public String toString() {
