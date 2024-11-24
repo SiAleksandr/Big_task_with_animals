@@ -1,4 +1,4 @@
-package base.util.assistant;
+package base.util.dbAssistants;
 
 import java.io.File;
 

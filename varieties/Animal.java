@@ -23,12 +23,16 @@ public abstract class Animal {
         groupId = groups.get(groupName);
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public void setId(Integer id) {}
