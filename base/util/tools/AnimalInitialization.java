@@ -19,7 +19,7 @@ public class AnimalInitialization {
         this.groupsNumbers = groupsNumbers;
     }
 
-    public static Animal getAnimal(ArrayList<Animal> types, String someType) {
+    public Animal getAnimal(ArrayList<Animal> types, String someType) {
         int target = 0;
         int i = 0;
         while (i < types.size()) {

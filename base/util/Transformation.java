@@ -9,9 +9,9 @@ import base.util.tools.AnimalInitialization;
 import varieties.Animal;
 
 public class Transformation {
-    DBConnector connector;
-    DBTranslator translator;
-    AnimalInitialization animalInitialization;
+    public DBConnector connector;
+    public DBTranslator translator;
+    public AnimalInitialization animalInitialization;
 
     public Transformation(DBConnector connector, DBTranslator translator,
     AnimalInitialization  animalInitialization) {
@@ -28,8 +28,6 @@ public class Transformation {
         return simpleEntries;
     }
 
-
-
     public Animal reborn (String line) {
         String[] dataArray = line.split(" ");
         ArrayList<Animal> animals = animalInitialization.allTypes;
@@ -38,12 +36,13 @@ public class Transformation {
         target.setGroupId(animalInitialization.groupsNumbers);
         target.name = dataArray[4];
         target.owner = dataArray[5];
-        String[] startValues = dataArray[6].split("|");   
-        int year = Integer.parseInt(startValues[0]);
-        int month = Integer.parseInt(startValues[1]);
-        int day = Integer.parseInt(startValues[2]);
+        String[] dateNumbers = dataArray[6].split("|");   
+        int year = Integer.parseInt(dateNumbers[0]);
+        int month = Integer.parseInt(dateNumbers[1]);
+        int day = Integer.parseInt(dateNumbers[2]);
         LocalDate birthDate = LocalDate.of(year, month, day);
         target.setBirthDate(birthDate);
+        target.setCommands(dataArray[7]);
         return target;
     }
 }
