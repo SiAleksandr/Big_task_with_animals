@@ -43,6 +43,9 @@ public class Transformation {
         LocalDate birthDate = LocalDate.of(year, month, day);
         target.setBirthDate(birthDate);
         target.setCommands(dataArray[7]);
+        int idInt = Integer.parseInt(dataArray[1]);
+        Integer id = Integer.valueOf(idInt);
+        target.setId(id);
         return target;
     }
 }
