@@ -36,7 +36,7 @@ public class Transformation {
         target.setGroupId(animalInitialization.groupsNumbers);
         target.name = dataArray[4];
         target.owner = dataArray[5];
-        String[] dateNumbers = dataArray[6].split("|");   
+        String[] dateNumbers = dataArray[6].split("-");   
         int year = Integer.parseInt(dateNumbers[0]);
         int month = Integer.parseInt(dateNumbers[1]);
         int day = Integer.parseInt(dateNumbers[2]);

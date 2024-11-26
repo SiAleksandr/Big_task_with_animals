@@ -18,8 +18,9 @@ public class Cat extends Pet {
     public void addCommand (String newCommand) {
         catCommands += " " + newCommand;
     }
-    @Override
+
     public String toString() {
-        return super.toString() + " " + catCommands;
+    String commandsModified = catCommands.replace(' ', '|');
+    return super.toString() + " " + commandsModified;
     }
 }

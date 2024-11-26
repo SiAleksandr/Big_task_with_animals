@@ -14,8 +14,8 @@ public class Dog extends Pet {
         dogCommands = Commands;
     }
 
-    @Override
-    public void addCommand(String command) {
-        dogCommands += " " + command;
+    public String toString() {
+        String commandsModified = dogCommands.replace(' ', '|');
+        return super.toString() + " " + commandsModified;
     }
 }

@@ -17,8 +17,9 @@ public class Horse extends PackAnimal {
     public void addCommand(String command) {
         horseCommands += " " + command;
     }
-    @Override
+
     public String toString() {
-        return super.toString() + " " + horseCommands;
+        String commandsModified = horseCommands.replace(' ', '|');
+        return super.toString() + " " + commandsModified;
     }
 }

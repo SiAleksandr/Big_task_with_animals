@@ -18,4 +18,9 @@ public class Donkey extends PackAnimal {
     public void addCommand(String command) {
         donkeyCommands += " " + command;
     }
+
+    public String toString() {
+        String commandsModified = donkeyCommands.replace(' ', '|');
+        return super.toString() + " " + commandsModified;
+    }
 }

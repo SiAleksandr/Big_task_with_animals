@@ -3,17 +3,41 @@ import varieties.groups.pets.*;
 import varieties.groups.packAnimals.*;
 
 import java.util.List;
-import java.util.ArrayList;;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
 
         ArrayList<Animal> allTypes = getTypes();
-        String cat = "cat";
+        String cat = "Cat";
         Animal animal = getAnimal(allTypes, cat);
-        animal.setCommands("Прыгать сидеть");
-        System.out.println(animal.toString());
 
+
+        HashMap<String, String> accordance = new HashMap<>();
+        accordance.put("Cat", "Pet");
+        accordance.put("Dog", "Pet");
+        accordance.put("Hamster", "pet");
+        accordance.put("Horse", "PackAnimal");
+        accordance.put("Camel", "PackAnimal");
+        accordance.put("Donkey", "PackAnimal");
+
+        HashMap<String, Integer> groups = new HashMap<>();
+        groups.put("Pet", 0);
+        groups.put("PackAnimals", 1);
+
+        animal.setGroup(accordance);
+        animal.setGroupId(groups);
+        animal.setId(4);
+        animal.setName("Pussy");
+        animal.setOwner("Sikalov Aleksandr");
+        LocalDate d = LocalDate.of(2025,  11, 30);
+        animal.setBirthDate(d);
+        animal.setCommands("Прыгать сидеть");
+
+
+        System.out.println(animal.toString());
         // cat1.setCommands("сидеть мяукать");
         // cat1.addComand("лежать");
         // horse1.setCommands("голопом стой");
@@ -25,9 +49,9 @@ public class Main {
 
     protected static ArrayList<Animal> getTypes() {
         ArrayList<Animal> allTypes = new ArrayList<>();
-        allTypes.add(new Hamster("dog"));
-        allTypes.add(new Dog("hamster"));
-        allTypes.add(new Cat("cat"));
+        allTypes.add(new Hamster("Dog"));
+        allTypes.add(new Dog("Hamster"));
+        allTypes.add(new Cat("Cat"));
         return allTypes;
     }
     protected static Animal getAnimal(ArrayList<Animal> types, String dog) {

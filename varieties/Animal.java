@@ -42,6 +42,9 @@ public abstract class Animal {
     public void addCommand(String command) {}
 
     public String toString() {
-        return type + " " + groupName + " " + groupId + " " + birthDate;
+        String nameModified = name.replace(' ', '|');
+        String ownerModified = owner.replace(' ', '|');
+        return groupName + " " + type + " " + nameModified + " "
+        + ownerModified + " " + birthDate.toString();
     }
 }

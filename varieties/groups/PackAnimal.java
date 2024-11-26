@@ -13,8 +13,7 @@ public abstract class PackAnimal extends Animal {
         packAnimalId = id;
     }
 
-    @Override
     public String toString() {
-        return super.toString();
+        return groupId + " " + packAnimalId + " " +  super.toString();
     }
 }

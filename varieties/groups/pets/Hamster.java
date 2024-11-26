@@ -14,8 +14,8 @@ public class Hamster extends Pet {
         hamsterCommands = commands;
     }
 
-    @Override
-    public void addCommand(String command) {
-        hamsterCommands += " " + command;
+    public String toString() {
+        String commandsModified = hamsterCommands.replace(' ', '|');
+        return super.toString() + " " + commandsModified;
     }
 }
