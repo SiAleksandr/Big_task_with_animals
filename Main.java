@@ -35,9 +35,26 @@ public class Main {
         LocalDate d = LocalDate.of(2025,  11, 30);
         animal.setBirthDate(d);
         animal.setCommands("Прыгать сидеть");
-
-
         System.out.println(animal.toString());
+        
+        // Как пройти список st с конца и до null
+        // ArrayList<String> st = new ArrayList<>();
+        // st.add("jjhf");
+        // st.add(null);
+        // st.add("nndf");
+        // int i = st.size() - 1;
+        // while(i >= 0) {
+        //     if(!(st.get(i) == null)) {
+        //         System.out.println(st.get(i));
+        //         i --;
+        //     }
+        //     else i = -1;   
+        // }
+
+        // Так можно
+        // System.out.println(st.get(0) + null + "jj");
+
+
         // cat1.setCommands("сидеть мяукать");
         // cat1.addComand("лежать");
         // horse1.setCommands("голопом стой");
