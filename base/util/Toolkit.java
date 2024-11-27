@@ -4,31 +4,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import base.util.addition.Preparer;
+import base.util.attachment.Triviality;
+import base.util.attachment.Checker;
 import base.util.dbAssistants.DBConnector;
 import base.util.dbAssistants.DBTranslator;
 import varieties.Animal;
 
-public class Transformation implements Preparer {
+public class Toolkit extends Triviality implements Checker {
     public DBConnector connector;
     public DBTranslator translator;
 
-    public Transformation(DBConnector connector, DBTranslator translator) {
+    public Toolkit(DBConnector connector, DBTranslator translator) {
         this.connector = connector;
         this.translator = translator;
-    }
-    @Override
-        public Animal getAnimal(ArrayList<Animal> types, String someType) {
-        int target = 0;
-        int i = 0;
-        while (i < types.size()) {
-            if (types.get(i).type.equals(someType)) {
-                target = i;
-                i = types.size(); // Чтобы выйти из цикла
-            }
-            else i++;
-        }
-        return types.get(target);
     }
 
     @Override
@@ -46,13 +34,6 @@ public class Transformation implements Preparer {
         return true;
     }
     
-    public ArrayList<String> getStringList(ArrayList<Animal> animals) {
-        ArrayList<String> simpleEntries = new ArrayList<>();
-        for(Animal one: animals) {
-            simpleEntries.add(one.toString());
-        }
-        return simpleEntries;
-    }
 
     public Animal reborn (String line, ArrayList<Animal> allTypes,
             HashMap<String, String> groupAccordance,
