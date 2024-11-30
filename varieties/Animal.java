@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Animal {
+    public Integer ochered;
     public Integer groupId;
     public String groupName;
     public String type;
@@ -13,6 +14,7 @@ public abstract class Animal {
 
     public Animal(String type) {
         this.type = type;
+        this.ochered = null;
     }
 
     public void setGroup(HashMap<String, String> accordance) {
