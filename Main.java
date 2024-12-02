@@ -1,6 +1,8 @@
 import varieties.Animal;
 import varieties.groups.pets.*;
 import varieties.groups.packAnimals.*;
+import base.util.Toolkit;
+import base.Collector;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -11,31 +13,54 @@ public class Main {
     public static void main(String[] args) {
 
         ArrayList<Animal> allTypes = getTypes();
-        String cat = "Cat";
-        Animal animal = getAnimal(allTypes, cat);
 
 
         HashMap<String, String> accordance = new HashMap<>();
+
         accordance.put("Cat", "Pet");
         accordance.put("Dog", "Pet");
-        accordance.put("Hamster", "pet");
+        accordance.put("Hamster", "Pet");
         accordance.put("Horse", "PackAnimal");
         accordance.put("Camel", "PackAnimal");
         accordance.put("Donkey", "PackAnimal");
 
-        HashMap<String, Integer> groups = new HashMap<>();
-        groups.put("Pet", 0);
-        groups.put("PackAnimals", 1);
+        Collector co = new Collector();
 
-        animal.setGroup(accordance);
-        animal.setGroupId(groups);
-        animal.setId(4);
-        animal.setName("Pussy");
-        animal.setOwner("Sikalov Aleksandr");
-        LocalDate d = LocalDate.of(2025,  11, 30);
-        animal.setBirthDate(d);
-        animal.setCommands("Прыгать сидеть");
-        System.out.println(animal.toString());
+    
+            co.startWork();
+            co.getReady(accordance, allTypes);
+            ArrayList<Animal> a = co.rebornAll(accordance, allTypes);
+            for(int i = 0; i < a.size(); i++) {
+                System.out.println(a.get(i).toString());
+            }
+
+            for (int n = 0; n < co.corruptedData.size(); n++) {
+                System.out.println("Error: " + co.corruptedData.get(n));
+            }
+            co.bigList.add("ЛяЛя ля ля ля");
+            co.saveAll();
+            System.out.println("Конец");
+        //     for(String item: co.corruptedData){
+        //         System.out.println("Error: " + item);
+        //     }      
+        // }
+        // Integer number = 0;
+        // for(String groupName: accordance.values()) {
+        //     if (!(groupNumbers.containsValue(groupName))) {
+        //         groupNumbers.put(number, groupName);
+        //         number ++;
+        //     }
+        // }
+
+        // HashMap<String, Integer> groups = new HashMap<>();
+        // groups.put("Pet", 0);
+        // groups.put("PackAnimal", 1);
+
+
+        // System.out.println(groupNumbers.toString());
+        // String l = "00 04 PackAnimal Donkey Osel Sancho|Pansa 1825-02-23 Сидеть|Бежать";
+        // Toolkit tk = new Toolkit();
+        // System.out.println(tk.lineCheck(l, accordance, groupNumbers));
         
         // Как пройти список st с конца и до null
         // ArrayList<String> st = new ArrayList<>();
@@ -65,14 +90,30 @@ public class Main {
         // System.out.println(cat1.toString());
         // System.out.println(horse1.toString());
     }
-
     protected static ArrayList<Animal> getTypes() {
         ArrayList<Animal> allTypes = new ArrayList<>();
-        allTypes.add(new Hamster("Dog"));
-        allTypes.add(new Dog("Hamster"));
         allTypes.add(new Cat("Cat"));
+        allTypes.add(new Dog("Dog"));
+        allTypes.add(new Hamster("Hamster"));
+        allTypes.add(new Horse("Horse"));
+        allTypes.add(new Camel("Camel"));
+        allTypes.add(new Donkey("Donkey"));
         return allTypes;
     }
+    public static HashMap<Integer, String> getReady (HashMap<String, String> accordance) {
+        HashMap<Integer, String> groupNumbers = new HashMap<>();
+        ArrayList<Animal> allKinds = getTypes();
+        Integer groupId = 0;
+        for(int i = 0; i < allKinds.size(); i++) {
+            allKinds.get(i).setGroup(accordance);
+            if (!(groupNumbers.containsValue(allKinds.get(i).getGroupName()))) {
+                groupNumbers.put(groupId, allKinds.get(i).getGroupName());
+                groupId ++;
+            }
+        }
+        return groupNumbers;
+    }
+
     protected static Animal getAnimal(ArrayList<Animal> types, String dog) {
         int target = 0;
         int i = 0;

@@ -2,8 +2,8 @@ package base.util.dbAssistants;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class DBTranslator {
@@ -12,19 +12,25 @@ public class DBTranslator {
         this.fileName = fileName;
     }
     public ArrayList<String> getList(String fileName) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(this.fileName));
-        String line;
         ArrayList<String> linesList = new ArrayList<>();
-        while ((line = br.readLine()) != null) {
-            linesList.add(line);
+        String line;
+        FileReader fr = new FileReader(fileName);
+        BufferedReader br = new BufferedReader(fr);
+        line = br.readLine();
+        if (line != null) linesList.add(line);
+        while (line != null) {
+            line = br.readLine();
+            if(line != null)
+                linesList.add(line);
         }
         br.close();
+        fr.close();
         return linesList;
     }
     public void writeFile(ArrayList<String> list, boolean continuation) throws IOException {
         FileWriter fw = new FileWriter(this.fileName, continuation);
-        for (String line: list) {
-            fw.write(line);
+        for (int i = 0; i < list.size(); i++) {
+            fw.write(list.get(i));
             fw.append('\n');
         }
         fw.flush();

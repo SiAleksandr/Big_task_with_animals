@@ -1,6 +1,7 @@
 package base.util;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,33 +12,52 @@ import base.util.dbAssistants.DBTranslator;
 import varieties.Animal;
 
 public class Toolkit extends Triviality implements Checker {
-    public DBConnector connector;
-    public DBTranslator translator;
 
-    public Toolkit(DBConnector connector, DBTranslator translator) {
-        this.connector = connector;
-        this.translator = translator;
+    public Toolkit () {}
+
+    @Override
+    public boolean isDigit (String subject) {
+        try {
+            Integer.parseInt(subject);
+            return true;
+        }
+        catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     @Override
-    public boolean lineCheck (String line, ArrayList<Animal> allTypes,
+    public boolean lineCheck (String line,
             HashMap<String, String> groupAccordance,
-            HashMap<String, Integer> groupsNumbers) {
+            HashMap<Integer, String> groupsNumbers) {
         String[] dataItems = line.split(" ");
         int correctAmount = 8;
         if (dataItems.length == correctAmount) {
-
+            if (isDigit(dataItems[0]) && (isDigit(dataItems[1]))) {
+                if (groupsNumbers.containsValue(dataItems[2])) {
+                    Integer groupNum = Integer.valueOf(dataItems[0]);
+                    if (groupsNumbers.get(groupNum).equals(dataItems[2])) {
+                        if (groupAccordance.containsKey(dataItems[3])) {
+                            if (groupAccordance.get(dataItems[3]).equals(dataItems[2])) {
+                                try {
+                                    LocalDate.parse(dataItems[6]);
+                                    return true;
+                                } catch (DateTimeParseException e) {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
-
-
-        
-        return true;
+        return false;
     }
     
 
     public Animal reborn (String line, ArrayList<Animal> allTypes,
             HashMap<String, String> groupAccordance,
-            HashMap<String, Integer> groupsNumbers) {
+            HashMap<Integer, String> groupsNumbers, int index) {
         String[] dataArray = line.split(" ");
         ArrayList<Animal> animals = allTypes;
         Animal target = getAnimal(animals, dataArray[3]);
@@ -55,6 +75,7 @@ public class Toolkit extends Triviality implements Checker {
         int idInt = Integer.parseInt(dataArray[1]);
         Integer id = Integer.valueOf(idInt);
         target.setId(id);
+        target.setSeat(index);
         return target;
     }
 }

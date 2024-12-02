@@ -7,8 +7,10 @@ import varieties.Animal;
 
 public interface Checker {
 
-    public boolean lineCheck (String line, ArrayList<Animal> allTypes,
+    public boolean isDigit (String subject);
+
+    public boolean lineCheck (String line,
             HashMap<String, String> groupAccordance,
-            HashMap<String, Integer> groupsNumbers);
+            HashMap<Integer, String> groupsNumbers);
 
 }

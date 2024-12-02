@@ -3,9 +3,10 @@ package base.util.dbAssistants;
 import java.io.File;
 
 public class DBConnector {
-    public static final String listFile = "db.txt";
+    public static String fileName;
+    {fileName = "db.txt";}
     public static void createDb() throws Exception {
-        File db = new File(listFile);
+        File db = new File(fileName);
         if (db.createNewFile()) {
             System.out.println("file db.txt created");
         }

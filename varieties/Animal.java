@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Animal {
-    public Integer ochered;
+    public Integer seat;
     public Integer groupId;
     public String groupName;
     public String type;
@@ -14,15 +14,24 @@ public abstract class Animal {
 
     public Animal(String type) {
         this.type = type;
-        this.ochered = null;
+        this.seat = null;
     }
 
     public void setGroup(HashMap<String, String> accordance) {
         groupName = accordance.get(type);
     }
 
-    public void setGroupId(HashMap<String, Integer> groups) {
-        groupId = groups.get(groupName);
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupId(HashMap<Integer, String> groups) {
+        for(Integer i = 0; i < groups.size(); i++) {
+            if(groups.get(i).equals(groupName)) {
+                groupId = i;
+                i = groups.size();
+            }
+        }
     }
 
     public void setName(String name) {
@@ -38,6 +47,10 @@ public abstract class Animal {
     }
 
     public void setId(Integer id) {}
+
+    public void setSeat(Integer seat) {
+        this.seat = seat;
+    }
 
     public void setCommands(String commands) {}
 
