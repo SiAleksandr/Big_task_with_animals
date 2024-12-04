@@ -18,14 +18,6 @@ public abstract class Triviality {
         }
         return types.get(target);
     }
-
-    public ArrayList<String> getStringList(ArrayList<Animal> animals) {
-        ArrayList<String> simpleEntries = new ArrayList<>();
-        for(Animal one: animals) {
-            simpleEntries.add(one.toString());
-        }
-        return simpleEntries;
-    }
 }
     
 
