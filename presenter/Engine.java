@@ -1,4 +1,4 @@
-package viewmodel;
+package presenter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,10 +13,6 @@ import varieties.groups.pets.Dog;
 import varieties.groups.pets.Hamster;
 
 public class Engine {
-    private static Collector source;
-    static {
-        source = new Collector();
-    }
 
     public Engine() {}
 
@@ -41,4 +37,5 @@ public class Engine {
         accordance.put("Donkey", "PackAnimal");
         return accordance;
     }
+    // storage information
 }
