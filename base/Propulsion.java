@@ -9,7 +9,14 @@ public class Propulsion {
     public Collector source;
     public ArrayList<Animal> animalList;
 
-    public Propulsion(Collector source) {
-        this.source = source;
+    public Propulsion() {
+        source = new Collector();
+    }
+
+    public boolean start() {
+        if (source.startWork()) {
+            return true;
+        }
+        else return false;
     }
 }

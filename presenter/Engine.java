@@ -3,7 +3,7 @@ package presenter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import base.Collector;
+import base.Propulsion;
 import varieties.Animal;
 import varieties.groups.packAnimals.Camel;
 import varieties.groups.packAnimals.Donkey;
@@ -14,7 +14,11 @@ import varieties.groups.pets.Hamster;
 
 public class Engine {
 
-    public Engine() {}
+    Propulsion functional;
+
+    public Engine() {
+        functional = new Propulsion();
+    }
 
     private ArrayList<Animal> constructTypes() {
         ArrayList<Animal> allTypes = new ArrayList<>();
@@ -36,6 +40,13 @@ public class Engine {
         accordance.put("Camel", "PackAnimal");
         accordance.put("Donkey", "PackAnimal");
         return accordance;
+    }
+
+    public boolean checkStart () {
+        if (functional.start()) {
+            return true;
+        }
+        else return false;
     }
     // storage information
 }

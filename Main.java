@@ -40,6 +40,11 @@ public class Main {
             co.bigList.add("ЛяЛя ля ля ля");
             co.saveAll();
             System.out.println("Конец");
+            System.out.println("\n 0. Save everything and exit");
+            System.out.println(" 1. Add new animal");
+            System.out.println(" 2. View commands executed by the animal");
+            System.out.println(" 3. Teach the animal new command(s)");
+            System.out.println(" 4. All animals by date of birth, starting from the oldest");
         //     for(String item: co.corruptedData){
         //         System.out.println("Error: " + item);
         //     }      

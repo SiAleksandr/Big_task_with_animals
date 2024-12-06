@@ -20,21 +20,24 @@ public class Collector {
 
     public Collector () {}
 
-    public void startWork() {
+    public boolean startWork() {
         connector = new DBConnector();
         try {
             connector.createDb();
         }
         catch(Exception e) {
-            System.out.println("Конектор ошибся");
+            System.out.println("The storage creation failed");
+            return false;
         }
         translator = new DBTranslator(connector.fileName);
         try {
             bigList = translator.getList(connector.fileName);
         }
         catch(IOException e) {
-            System.out.println("Транслятор ошибся");
+            System.out.println("The storage reading failed.");
+            return false;
         }
+        return true;
     }
 
     public void getReady (HashMap<String, String> accordance, ArrayList<Animal> allKinds) {
