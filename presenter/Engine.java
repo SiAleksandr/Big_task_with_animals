@@ -48,15 +48,40 @@ public class Engine {
     public void run () {
         reveal.inform("storage information:");
         if (functional.start()) {
+            HashMap<String, String> accordance = constructAccordance();
+            ArrayList<Animal> allTypes = constructTypes();
+            functional.source.rebornAll(accordance, allTypes);
             while(true) {
-                reveal.showMenu();
-                String choice = reveal.prompt("Enter the number -> ");
-            } 
+                int linesNow = reveal.showMenu();
+                String invitationString = "Enter the number of action -> ";
+                Integer choice = getValidNumber(invitationString, linesNow);
+                switch (choice) {
+                    case 0:
+                        return;
+                    case 1:
+                        break;
+                    default:
+                        break;
+                }
+            }
 
         }
         else {
             reveal.inform("There is now the end of program.");
         }
+    }
+
+//    Not valid input. Enter valid number -> 
+    private Integer getValidNumber (String invitation, int max) {
+        String input = reveal.prompt(invitation);
+        if (functional.source.toolkit.isDigit(input)) {
+            Integer target = Integer.parseInt(input);
+            if ((target >= 0) && (target <= max)) {
+                return target;
+            }
+        }
+        invitation = "Not valid input. Enter valid number -> ";
+        return getValidNumber(invitation, max);
     }
 
     // public boolean checkStart () {

@@ -18,7 +18,9 @@ public class Collector {
     public ArrayList<String> bigList;
     public ArrayList<String> corruptedData;
 
-    public Collector () {}
+    public Collector () {
+        toolkit = new Toolkit();
+    }
 
     public boolean startWork() {
         connector = new DBConnector();
@@ -55,7 +57,6 @@ public class Collector {
 
     public ArrayList<Animal> rebornAll (HashMap<String, String> accordance,
     ArrayList<Animal> allKinds) {
-        toolkit = new Toolkit();
         ArrayList<Animal> animals = new ArrayList<>();
         corruptedData = new ArrayList<>();
         for(int index = 0; index < bigList.size(); index++) {

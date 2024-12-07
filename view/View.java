@@ -12,12 +12,14 @@ public class View {
         System.out.println(message);
     }
 
-    public void showMenu () {
+    public int showMenu () {
         System.out.println("\n 0. Save everything and exit");
         System.out.println(" 1. Add new animal");
         System.out.println(" 2. View commands executed by the animal");
         System.out.println(" 3. Teach the animal new command(s)");
-        System.out.println(" 4. All animals by date of birth, starting from the oldest");        
+        System.out.println(" 4. All animals by date of birth, starting from the oldest");
+        int lineCount = 5;
+        return lineCount;
     }
 /*
     public void runAll() {
