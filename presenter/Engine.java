@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import base.Propulsion;
+import view.View;
 import varieties.Animal;
 import varieties.groups.packAnimals.Camel;
 import varieties.groups.packAnimals.Donkey;
@@ -15,9 +16,11 @@ import varieties.groups.pets.Hamster;
 public class Engine {
 
     Propulsion functional;
+    View reveal;
 
     public Engine() {
         functional = new Propulsion();
+        reveal = new View();
     }
 
     private ArrayList<Animal> constructTypes() {
@@ -42,11 +45,25 @@ public class Engine {
         return accordance;
     }
 
-    public boolean checkStart () {
+    public void run () {
+        reveal.inform("storage information:");
         if (functional.start()) {
-            return true;
+            while(true) {
+                reveal.showMenu();
+                String choice = reveal.prompt("Enter the number -> ");
+            } 
+
         }
-        else return false;
+        else {
+            reveal.inform("There is now the end of program.");
+        }
     }
+
+    // public boolean checkStart () {
+    //     if (functional.start()) {
+    //         return true;
+    //     }
+    //     else return false;
+    // }
     // storage information
 }
