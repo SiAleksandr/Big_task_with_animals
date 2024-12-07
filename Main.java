@@ -5,11 +5,16 @@ import base.util.Toolkit;
 import base.Collector;
 
 import java.util.List;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.time.LocalDate;
 
 public class Main {
+    private static Collector col;
+        static {
+            col = new Collector();
+        }
     public static void main(String[] args) {
 
         ArrayList<Animal> allTypes = getTypes();
@@ -37,7 +42,6 @@ public class Main {
             for (int n = 0; n < co.corruptedData.size(); n++) {
                 System.out.println("Error: " + co.corruptedData.get(n));
             }
-            co.bigList.add("ЛяЛя ля ля ля");
             co.saveAll();
             System.out.println("Конец");
             System.out.println("\n 0. Save everything and exit");
@@ -45,8 +49,28 @@ public class Main {
             System.out.println(" 2. View commands executed by the animal");
             System.out.println(" 3. Teach the animal new command(s)");
             System.out.println(" 4. All animals by date of birth, starting from the oldest");
-        //     for(String item: co.corruptedData){
-        //         System.out.println("Error: " + item);
+            Integer n = getValidNumber("Enter the number of action -> ", 5);
+            System.out.println("Yes! " + n);
+        }
+
+            private static Integer getValidNumber (String invitation, int max) {
+                String input = prompt(invitation);
+                if (col.toolkit.isDigit(input)) {
+                    Integer target = Integer.parseInt(input);
+                    if ((target >= 0) && (target < max)) {
+                        return target;
+                    }
+                }
+                invitation = "Not valid input. Enter valid number -> ";
+                return getValidNumber(invitation, max);
+            }
+
+        public static String prompt (String message) {
+            Scanner input = new Scanner(System.in);
+            System.out.print(message);
+            return input.nextLine();
+    }
+
         //     }      
         // }
         // Integer number = 0;
@@ -94,7 +118,7 @@ public class Main {
         // cat1.setType("Кошка");
         // System.out.println(cat1.toString());
         // System.out.println(horse1.toString());
-    }
+
     protected static ArrayList<Animal> getTypes() {
         ArrayList<Animal> allTypes = new ArrayList<>();
         allTypes.add(new Cat("Cat"));

@@ -59,6 +59,7 @@ public class Engine {
                     case 0:
                         return;
                     case 1:
+
                         break;
                     default:
                         break;
@@ -71,12 +72,29 @@ public class Engine {
         }
     }
 
-//    Not valid input. Enter valid number -> 
+    private Animal describeNewAnimal () {
+        ArrayList<Animal> allTypes = constructTypes();
+        Integer index = 0;
+        String description = "\n " + Integer.toString(index) + " - Cancel";
+        reveal.inform(description);
+        while (index < allTypes.size()) {
+            Integer numberForView = index + 1; 
+            description = " " + numberForView + " - " + allTypes.get(index).getType();
+            index ++;
+        }
+        String invitation = "Enter the number of type -> ";
+        int lineCount = allTypes.size() + 1;
+        Integer choice = getValidNumber(invitation, lineCount);
+
+        // Заглушка:
+        return allTypes.get(5);
+    }
+
     private Integer getValidNumber (String invitation, int max) {
         String input = reveal.prompt(invitation);
         if (functional.source.toolkit.isDigit(input)) {
             Integer target = Integer.parseInt(input);
-            if ((target >= 0) && (target <= max)) {
+            if ((target >= 0) && (target < max)) {
                 return target;
             }
         }

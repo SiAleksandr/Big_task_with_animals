@@ -17,6 +17,10 @@ public abstract class Animal {
         this.seat = null;
     }
 
+    public String getType () {
+        return type;
+    }
+
     public void setGroup(HashMap<String, String> accordance) {
         groupName = accordance.get(type);
     }
