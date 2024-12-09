@@ -1,7 +1,9 @@
 package presenter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.lang.Exception;
 
 import base.Propulsion;
 import view.View;
@@ -54,9 +56,10 @@ public class Engine {
             ArrayList<Animal> main = functional.source.rebornAll(accordance, allTypes);
             functional.setAnimalList(main);
             while(true) {
+                int minMenuValue = 0;
                 int linesNow = reveal.showMenu();
                 String invitationString = "Enter the number of action -> ";
-                Integer choice = getValidNumber(invitationString, linesNow);
+                Integer choice = getValidNumber(invitationString, minMenuValue, linesNow);
                 switch (choice) {
                     case 0:
                         return;
@@ -79,19 +82,24 @@ public class Engine {
         }
     }
 
-    private Animal describeNewAnimal() throws Exception {
+    private Animal describeNewAnimal() throws Exception{
         ArrayList<Animal> allTypes = constructTypes();
-        String description;
         Integer index = 0;
+        String description = " " + index + " - Cancel the addition";
+        reveal.inform(description);
         while (index < allTypes.size()) {
             Integer numberForView = index + 1; 
             description = " " + numberForView + " - " + allTypes.get(index).getType();
-            System.out.println(description);
+            reveal.inform(description);
             index ++;
         }
         String invitation = "Enter the number of type -> ";
+        int minValue = 0;
         int lineCount = allTypes.size();
-        Integer choice = getValidNumber(invitation, lineCount);
+        Integer choice = getValidNumber(invitation, minValue, lineCount);
+        if (choice == 0) {
+            throw new Exception();
+        }
         index = choice - 1;
         Animal target = allTypes.get(index);
         HashMap<String, String> accordance = constructAccordance();
@@ -104,21 +112,22 @@ public class Engine {
         invitation = "\nEnter the owner of this animal -> ";
         name = getWords(invitation);
         target.setOwner(name);
-
-        // Заглушка:
-        return allTypes.get(5);
+        reveal.inform("");
+        LocalDate birthDate = enterValidDate();
+        target.setBirthDate(birthDate);
+        return target;
     }
 
-    private Integer getValidNumber (String invitation, int max) {
+    private Integer getValidNumber (String invitation, int min, int max) {
         String input = reveal.prompt(invitation);
         if (functional.source.toolkit.isDigit(input)) {
             Integer target = Integer.parseInt(input);
-            if ((target >= 0) && (target < max)) {
+            if ((target >= min) && (target <= max)) {
                 return target;
             }
         }
         invitation = "Not valid input. Enter valid number -> ";
-        return getValidNumber(invitation, max);
+        return getValidNumber(invitation, min, max);
     }
 
     private String getWords(String invitation) {
@@ -129,6 +138,34 @@ public class Engine {
         }
         invitation = "Not valid input. Enter the required -> ";
         return getWords(invitation);
+    }
+
+    private LocalDate enterValidDate () throws Exception {
+        while(true) {
+            int minValue = 1;
+            int maxValue = 9999;
+            String current = "Enter the year of birth of this animal -> ";
+            Integer year = getValidNumber (current, minValue, maxValue);
+            maxValue = 12;
+            current = "Enter the month of birth as a number -> ";
+            Integer month = getValidNumber(current, minValue, maxValue);
+            maxValue = 31;
+            current = "Enter the day of the month -> ";
+            Integer dayOfMonth = getValidNumber(current, minValue, maxValue);
+            if (functional.source.toolkit.isDate(year, month, dayOfMonth)) {
+                LocalDate today = LocalDate.now();
+                LocalDate birthDate = LocalDate.of(year, month, dayOfMonth);
+                if ((birthDate.isBefore(today)) || (birthDate.isEqual(today))) {
+                    return birthDate;
+                }
+            }
+            reveal.inform("Press Enter to add a valid date, or type the letter Q if you");
+            String input = reveal.prompt("want to return to the main menu. -> ");
+            input = input.toUpperCase();
+            if (input.equals("Q")) {
+                throw new Exception();
+            }
+        }   
     }
 
     // public boolean checkStart () {

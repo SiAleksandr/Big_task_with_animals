@@ -1,6 +1,7 @@
 package base.util;
 
 import java.time.LocalDate;
+import java.time.DateTimeException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +23,17 @@ public class Toolkit extends Triviality implements Checker {
             return true;
         }
         catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isDate (int year, int month, int dayOfMonth) {
+        try {
+            LocalDate.of(year, month, dayOfMonth);
+            return true;
+        }
+        catch (DateTimeException e) {
             return false;
         }
     }
@@ -53,7 +65,6 @@ public class Toolkit extends Triviality implements Checker {
         }
         return false;
     }
-    
 
     public Animal reborn (String line, ArrayList<Animal> allTypes,
             HashMap<String, String> groupAccordance,

@@ -18,7 +18,7 @@ public class View {
         System.out.println(" 2. View commands executed by the animal");
         System.out.println(" 3. Teach the animal new command(s)");
         System.out.println(" 4. All animals by date of birth, starting from the oldest");
-        int lineCount = 5;
+        int lineCount = 4;
         return lineCount;
     }
 /*
