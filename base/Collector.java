@@ -28,7 +28,7 @@ public class Collector {
             connector.createDb();
         }
         catch(Exception e) {
-            System.out.println("The storage creation failed");
+            System.out.println("the storage creation failed");
             return false;
         }
         translator = new DBTranslator(connector.fileName);
@@ -36,7 +36,7 @@ public class Collector {
             bigList = translator.getList(connector.fileName);
         }
         catch(IOException e) {
-            System.out.println("The storage reading failed.");
+            System.out.println("the storage reading failed.");
             return false;
         }
         return true;

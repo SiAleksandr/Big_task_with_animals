@@ -7,7 +7,7 @@ import varieties.Animal;
 public class Propulsion {
 
     public Collector source;
-    public ArrayList<Animal> animalList;
+    public ArrayList<Animal> collection;
 
     public Propulsion() {
         source = new Collector();
@@ -18,5 +18,14 @@ public class Propulsion {
             return true;
         }
         else return false;
+    }
+
+    public void setAnimalList (ArrayList<Animal> animalList) {
+        this.collection = animalList;
+    }
+
+    public void addAnimal (Animal target) {
+        collection.add(target);
+// придумать, как присвоить petId, например и seat для списка из Collector
     }
 }
