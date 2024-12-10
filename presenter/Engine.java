@@ -17,12 +17,12 @@ import varieties.groups.pets.Hamster;
 
 public class Engine {
 
-    Propulsion functional;
-    View reveal;
+    public Propulsion functional;
+    public View reveal;
 
     public Engine() {
         functional = new Propulsion();
-        reveal = new View();
+        reveal = new View(this);
     }
 
     private ArrayList<Animal> constructTypes() {
@@ -59,7 +59,7 @@ public class Engine {
                 int minMenuValue = 0;
                 int linesNow = reveal.showMenu();
                 String invitationString = "Enter the number of action -> ";
-                Integer choice = getValidNumber(invitationString, minMenuValue, linesNow);
+                Integer choice = reveal.getValidNumber(invitationString, minMenuValue, linesNow);
                 switch (choice) {
                     case 0:
                         return;
@@ -82,7 +82,7 @@ public class Engine {
         }
     }
 
-    private Animal describeNewAnimal() throws Exception{
+    public Animal describeNewAnimal() throws Exception{
         ArrayList<Animal> allTypes = constructTypes();
         Integer index = 0;
         String description = " " + index + " - Cancel the addition";
@@ -96,7 +96,7 @@ public class Engine {
         String invitation = "Enter the number of type -> ";
         int minValue = 0;
         int lineCount = allTypes.size();
-        Integer choice = getValidNumber(invitation, minValue, lineCount);
+        Integer choice = reveal.getValidNumber(invitation, minValue, lineCount);
         if (choice == 0) {
             throw new Exception();
         }
@@ -107,10 +107,10 @@ public class Engine {
         HashMap<Integer, String> groupNumbers = functional.source.groupNumbers;
         target.setGroupId(groupNumbers);
         invitation = "\nEnter the name of the animal -> ";
-        String name = getWords(invitation);
+        String name = reveal.getWords(invitation);
         target.setName(name);
         invitation = "\nEnter the owner of this animal -> ";
-        name = getWords(invitation);
+        name = reveal.getWords(invitation);
         target.setOwner(name);
         reveal.inform("");
         LocalDate birthDate = enterValidDate();
@@ -118,40 +118,18 @@ public class Engine {
         return target;
     }
 
-    private Integer getValidNumber (String invitation, int min, int max) {
-        String input = reveal.prompt(invitation);
-        if (functional.source.toolkit.isDigit(input)) {
-            Integer target = Integer.parseInt(input);
-            if ((target >= min) && (target <= max)) {
-                return target;
-            }
-        }
-        invitation = "Not valid input. Enter valid number -> ";
-        return getValidNumber(invitation, min, max);
-    }
-
-    private String getWords(String invitation) {
-        String input = reveal.prompt(invitation);
-        input = input.trim();
-        if (!input.isEmpty()) {
-            return input;
-        }
-        invitation = "Not valid input. Enter the required -> ";
-        return getWords(invitation);
-    }
-
     private LocalDate enterValidDate () throws Exception {
         while(true) {
             int minValue = 1;
             int maxValue = 9999;
             String current = "Enter the year of birth of this animal -> ";
-            Integer year = getValidNumber (current, minValue, maxValue);
+            Integer year = reveal.getValidNumber (current, minValue, maxValue);
             maxValue = 12;
             current = "Enter the month of birth as a number -> ";
-            Integer month = getValidNumber(current, minValue, maxValue);
+            Integer month = reveal.getValidNumber(current, minValue, maxValue);
             maxValue = 31;
             current = "Enter the day of the month -> ";
-            Integer dayOfMonth = getValidNumber(current, minValue, maxValue);
+            Integer dayOfMonth = reveal.getValidNumber(current, minValue, maxValue);
             if (functional.source.toolkit.isDate(year, month, dayOfMonth)) {
                 LocalDate today = LocalDate.now();
                 LocalDate birthDate = LocalDate.of(year, month, dayOfMonth);
@@ -159,15 +137,15 @@ public class Engine {
                     return birthDate;
                 }
             }
-            reveal.inform("Press Enter to add a valid date, or type the letter Q if you");
-            String input = reveal.prompt("want to return to the main menu. -> ");
+            reveal.inform("This date of birth are not real. Press Enter to add a valid date,");
+            String input = reveal.prompt("or type the letter Q to go the main menu -> ");
             input = input.toUpperCase();
             if (input.equals("Q")) {
                 throw new Exception();
             }
         }   
     }
-
+}
     // public boolean checkStart () {
     //     if (functional.start()) {
     //         return true;
@@ -175,4 +153,4 @@ public class Engine {
     //     else return false;
     // }
     // storage information
-}
+

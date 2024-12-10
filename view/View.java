@@ -3,13 +3,24 @@ package view;
 import java.util.Scanner;
 
 import presenter.Engine;
+import base.Propulsion;
 
 public class View {
 
-    public View() {}
+    public Engine process;
+
+    public View(Engine process) {
+        this.process = new Engine();
+}
 
     public void inform (String message) {
         System.out.println(message);
+    }
+
+    public String prompt (String message) {
+        Scanner input = new Scanner(System.in);
+        System.out.print(message);
+        return input.nextLine();
     }
 
     public int showMenu () {
@@ -21,6 +32,29 @@ public class View {
         int lineCount = 4;
         return lineCount;
     }
+
+    public Integer getValidNumber (String invitation, int min, int max) {
+        String input = prompt(invitation);
+        if (process.functional.source.toolkit.isDigit(input)) {
+            Integer target = Integer.parseInt(input);
+            if ((target >= min) && (target <= max)) {
+                return target;
+            }
+        }
+        invitation = "Not valid input. Enter valid number -> ";
+        return getValidNumber(invitation, min, max);
+    }
+
+    public String getWords(String invitation) {
+        String input = prompt(invitation);
+        input = input.trim();
+        if (!input.isEmpty()) {
+            return input;
+        }
+        invitation = "Not valid input. Enter the required -> ";
+        return getWords(invitation);
+    }
+}
 /*
     public void runAll() {
         System.out.println("storage information:");
@@ -40,11 +74,4 @@ public class View {
             return;
         }
     } */
-
-    public String prompt (String message) {
-        Scanner input = new Scanner(System.in);
-        System.out.print(message);
-        return input.nextLine();
-    }
-}
 
