@@ -63,11 +63,26 @@ public class Collector {
             if(toolkit.lineCheck(bigList.get(index), accordance, groupNumbers)) {
                 Animal item = toolkit.reborn(bigList.get(index),
                 allKinds, accordance, groupNumbers, index);
+                Integer currentId = setIdForNew(animals, item);
+                item.setId(currentId);
+                item.setSeat(index);
                 animals.add(item);
             }
             else corruptedData.add(bigList.get(index));
         }
         return animals;
+    }
+
+    public Integer setIdForNew (ArrayList<Animal> animalList, Animal item) {
+        Integer maxId = 0;
+        for (int a = 0; a < animalList.size(); a++) {
+            if (animalList.get(a).getGroupId() == item.getGroupId()) {
+                if (animalList.get(a).getId() > maxId) {
+                    maxId = animalList.get(a).getId();
+                }
+            }
+        }
+        return maxId + 1;
     }
 
     public void saveAll () {

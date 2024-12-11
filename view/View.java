@@ -1,8 +1,10 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import presenter.Engine;
+import varieties.Animal;
 import base.Propulsion;
 
 public class View {
@@ -31,6 +33,18 @@ public class View {
         System.out.println(" 4. All animals by date of birth, starting from the oldest");
         int lineCount = 4;
         return lineCount;
+    }
+
+    public int numberedTypesShow (ArrayList<Animal> allTypes, String zeroNumberMessage) {
+        int index = 0;
+        System.out.println(" " + index + " - " + zeroNumberMessage);
+        while (index < allTypes.size()) {
+            int numberForView = index + 1; 
+            String description = " " + numberForView + " - " + allTypes.get(index).getType();
+            System.out.println(description);
+            index ++;
+        }
+        return index;
     }
 
     public Integer getValidNumber (String invitation, int min, int max) {

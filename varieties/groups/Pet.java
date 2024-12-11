@@ -14,6 +14,11 @@ public abstract class Pet extends Animal{
         petId = id;
     }
 
+    @Override
+    public Integer getId() {
+        return petId;
+    }
+
     public String toString() {
         return groupId + " " + petId + " " + super.toString();
     }

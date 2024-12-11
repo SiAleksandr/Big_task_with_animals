@@ -25,6 +25,7 @@ public class Propulsion {
     }
 
     public void addAnimal (Animal target) {
+        
         collection.add(target);
 // придумать, как присвоить petId, например и seat для списка из Collector
     }

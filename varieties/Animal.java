@@ -38,6 +38,10 @@ public abstract class Animal {
         }
     }
 
+    public Integer getGroupId () {
+        return groupId;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -51,6 +55,10 @@ public abstract class Animal {
     }
 
     public void setId(Integer id) {}
+
+    public Integer getId() {
+        return null;
+    }
 
     public void setSeat(Integer seat) {
         this.seat = seat;

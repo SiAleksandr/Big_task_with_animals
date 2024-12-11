@@ -45,14 +45,19 @@ public class Toolkit extends Triviality implements Checker {
         String[] dataItems = line.split(" ");
         int correctAmount = 8;
         if (dataItems.length == correctAmount) {
-            if (isDigit(dataItems[0]) && (isDigit(dataItems[1]))) {
-                if (groupsNumbers.containsValue(dataItems[2])) {
-                    Integer groupNum = Integer.valueOf(dataItems[0]);
-                    if (groupsNumbers.get(groupNum).equals(dataItems[2])) {
-                        if (groupAccordance.containsKey(dataItems[3])) {
-                            if (groupAccordance.get(dataItems[3]).equals(dataItems[2])) {
+            int groupIdIndex = 0;
+            int idInGroupIndex = 1;
+            if (isDigit(dataItems[groupIdIndex]) && (isDigit(dataItems[idInGroupIndex]))) {
+                int groupNameIndex = 2;
+                if (groupsNumbers.containsValue(dataItems[groupNameIndex])) {
+                    Integer groupNum = Integer.valueOf(dataItems[groupIdIndex]);
+                    if (groupsNumbers.get(groupNum).equals(dataItems[groupNameIndex])) {
+                        int typeIndex = 3;
+                        if (groupAccordance.containsKey(dataItems[typeIndex])) {
+                            if (groupAccordance.get(dataItems[typeIndex]).equals(dataItems[groupNameIndex])) {
+                                int dateIndex = 6;
                                 try {
-                                    LocalDate.parse(dataItems[6]);
+                                    LocalDate.parse(dataItems[dateIndex]);
                                     return true;
                                 } catch (DateTimeParseException e) {
                                     return false;

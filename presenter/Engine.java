@@ -25,7 +25,7 @@ public class Engine {
         reveal = new View(this);
     }
 
-    private ArrayList<Animal> constructTypes() {
+    public ArrayList<Animal> constructTypes() {
         ArrayList<Animal> allTypes = new ArrayList<>();
         allTypes.add(new Cat("Cat"));
         allTypes.add(new Dog("Dog"));
@@ -83,24 +83,16 @@ public class Engine {
     }
 
     public Animal describeNewAnimal() throws Exception{
+        String descriptionForCancel = "Cancel the addition";
         ArrayList<Animal> allTypes = constructTypes();
-        Integer index = 0;
-        String description = " " + index + " - Cancel the addition";
-        reveal.inform(description);
-        while (index < allTypes.size()) {
-            Integer numberForView = index + 1; 
-            description = " " + numberForView + " - " + allTypes.get(index).getType();
-            reveal.inform(description);
-            index ++;
-        }
+        int lastNumber = reveal.numberedTypesShow(allTypes, descriptionForCancel);
         String invitation = "Enter the number of type -> ";
         int minValue = 0;
-        int lineCount = allTypes.size();
-        Integer choice = reveal.getValidNumber(invitation, minValue, lineCount);
+        Integer choice = reveal.getValidNumber(invitation, minValue, lastNumber);
         if (choice == 0) {
             throw new Exception();
         }
-        index = choice - 1;
+        int index = choice - 1;
         Animal target = allTypes.get(index);
         HashMap<String, String> accordance = constructAccordance();
         target.setGroup(accordance);
@@ -115,6 +107,11 @@ public class Engine {
         reveal.inform("");
         LocalDate birthDate = enterValidDate();
         target.setBirthDate(birthDate);
+        Integer newId = functional.source.setIdForNew(functional.collection, target);
+        target.setId(newId);
+        int currentSeat = functional.source.bigList.size();
+        target.setSeat(currentSeat);
+        functional.source.bigList.add(target.toString());
         return target;
     }
 
@@ -145,12 +142,10 @@ public class Engine {
             }
         }   
     }
+
+    // public Animal search (ArrayList<Animal> allAnimals) {}
+    // Искать по типу и имени, если что, показать id
+
 }
-    // public boolean checkStart () {
-    //     if (functional.start()) {
-    //         return true;
-    //     }
-    //     else return false;
-    // }
-    // storage information
+
 
