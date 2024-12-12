@@ -82,13 +82,19 @@ public class Engine {
         }
     }
 
-    public Animal describeNewAnimal() throws Exception{
+    private Integer getNumOfTipe (ArrayList<Animal> animalKinds,
+            String descriptionForCancel, String invitation) {
+        int lastNumber = reveal.numberedTypesShow(animalKinds, descriptionForCancel);
+        int minValid = 0;
+        Integer choice = reveal.getValidNumber(invitation, minValid, lastNumber);
+        return choice;
+    }
+
+    public Animal describeNewAnimal() throws Exception {
+        ArrayList <Animal> allTypes = constructTypes();
         String descriptionForCancel = "Cancel the addition";
-        ArrayList<Animal> allTypes = constructTypes();
-        int lastNumber = reveal.numberedTypesShow(allTypes, descriptionForCancel);
         String invitation = "Enter the number of type -> ";
-        int minValue = 0;
-        Integer choice = reveal.getValidNumber(invitation, minValue, lastNumber);
+        Integer choice = getNumOfTipe(allTypes, descriptionForCancel, invitation);
         if (choice == 0) {
             throw new Exception();
         }
@@ -140,12 +146,50 @@ public class Engine {
             if (input.equals("Q")) {
                 throw new Exception();
             }
-        }   
+        }
     }
+
+    private Animal search (ArrayList<Animal> allAnimals) throws Exception {
+        ArrayList<Animal> allTypes = constructTypes(); 
+        String  descriptionForCancel = "Cancel the search";
+        String invitation = "Enter a number to search such type -> ";
+        Integer choice = getNumOfTipe(allTypes, descriptionForCancel, invitation);
+        if (choice == 0) {
+            throw new Exception();
+        }
+        String wantType = allTypes.get(choice - 1).getType();
+        ArrayList<Animal> equalType = new ArrayList<>();
+        for(int i = 0; i < allAnimals.size(); i++) {
+            if (allAnimals.get(i).getType().equals(wantType)) {
+                Animal item = allAnimals.get(i);
+                String output = item.getId() + " " + wantType + " " + item.getName() + 
+                " " + item.getBirthDate().toString() + " " + item.getOwner();
+                System.out.println(output);
+                equalType.add(item);
+            }
+        }
+        invitation = "Enter the animal's name -> ";
+        String wantName = reveal.getWords(invitation);
+        int count = 0;
+        for (int n = 0; n < equalType.size(); n++) {
+            if (equalType.get(n).getName().equals(wantName)) {
+                Animal nameEqual = equalType.get(n);
+                String present = nameEqual.getId() + " " + wantType + 
+                " " + nameEqual.getName() + " " + nameEqual.getBirthDate().toString() + 
+                " " + nameEqual.getOwner();
+                System.out.println(present);
+                count ++;
+            }
+        }
+
+        // Заглушка
+        return equalType.get(count -1);
+
+    }
+}
 
     // public Animal search (ArrayList<Animal> allAnimals) {}
     // Искать по типу и имени, если что, показать id
 
-}
 
 

@@ -46,12 +46,24 @@ public abstract class Animal {
         this.name = name;
     }
 
+    public String getName () {
+        return name;
+    }
+
     public void setOwner(String owner) {
         this.owner = owner;
     }
 
+    public String getOwner () {
+        return owner;
+    }
+
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
     public void setId(Integer id) {}
