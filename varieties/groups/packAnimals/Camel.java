@@ -19,6 +19,11 @@ public class Camel extends PackAnimal {
         camelCommands += " " + command;
     }
 
+    @Override
+    public String getCommands () {
+        return camelCommands;
+    }
+
     public String toString() {
         String commandsModified = camelCommands.replace(' ', '|');
         return super.toString() + " " + commandsModified;

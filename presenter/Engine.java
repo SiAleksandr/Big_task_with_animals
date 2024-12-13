@@ -70,6 +70,15 @@ public class Engine {
                         } catch (Exception e) {
                             reveal.inform("adding a new animal is canceled");
                         }
+                    case 2:
+                        try {
+                            Animal target = search(functional.collection);
+                            reveal.inform(target.getId() + " " + target.getType() + 
+                            " " + target.getName() + "; " + "Commands: " + target.getCommands());
+                        }
+                        catch (Exception e) {
+                            reveal.inform("adding a command is canceled.");
+                        }
                         break;
                     default:
                         break;
@@ -150,40 +159,50 @@ public class Engine {
     }
 
     private Animal search (ArrayList<Animal> allAnimals) throws Exception {
-        ArrayList<Animal> allTypes = constructTypes(); 
-        String  descriptionForCancel = "Cancel the search";
-        String invitation = "Enter a number to search such type -> ";
-        Integer choice = getNumOfTipe(allTypes, descriptionForCancel, invitation);
-        if (choice == 0) {
-            throw new Exception();
-        }
-        String wantType = allTypes.get(choice - 1).getType();
-        ArrayList<Animal> equalType = new ArrayList<>();
-        for(int i = 0; i < allAnimals.size(); i++) {
-            if (allAnimals.get(i).getType().equals(wantType)) {
-                Animal item = allAnimals.get(i);
-                String output = item.getId() + " " + wantType + " " + item.getName() + 
-                " " + item.getBirthDate().toString() + " " + item.getOwner();
-                System.out.println(output);
-                equalType.add(item);
+        ArrayList<Animal> allTypes = constructTypes();
+        while (true) {   
+            String  descriptionForCancel = "Cancel the search";
+            String invitation = "Enter a number to search such type -> ";
+            Integer choice = getNumOfTipe(allTypes, descriptionForCancel, invitation);
+            if (choice == 0) {
+                throw new Exception();
             }
-        }
-        invitation = "Enter the animal's name -> ";
-        String wantName = reveal.getWords(invitation);
-        int count = 0;
-        for (int n = 0; n < equalType.size(); n++) {
-            if (equalType.get(n).getName().equals(wantName)) {
-                Animal nameEqual = equalType.get(n);
-                String present = nameEqual.getId() + " " + wantType + 
-                " " + nameEqual.getName() + " " + nameEqual.getBirthDate().toString() + 
-                " " + nameEqual.getOwner();
-                System.out.println(present);
-                count ++;
+            String wantType = allTypes.get(choice - 1).getType();
+            ArrayList<Animal> equalType = new ArrayList<>();
+            for(int i = 0; i < allAnimals.size(); i++) {
+                if (allAnimals.get(i).getType().equals(wantType)) {
+                    Animal item = allAnimals.get(i);
+                    String output = item.getId() + " " + wantType + " " + item.getName() + 
+                    " " + item.getBirthDate().toString() + " " + item.getOwner();
+                    System.out.println(output);
+                    equalType.add(item);
+                }
             }
+            if (equalType.size() == 0) {
+                reveal.inform("there is not a single animal of this type yet.\n");
+                throw new Exception();
+            }
+            invitation = "Enter the animal's name -> ";
+            String wantName = reveal.getWords(invitation);
+            int targetIndex = -1;
+            int count = 0;
+            for (int n = 0; n < equalType.size(); n++) {
+                if (equalType.get(n).getName().equals(wantName)) {
+                    Animal nameEqual = equalType.get(n);
+                    String present = nameEqual.getId() + " " + wantType + 
+                    " " + nameEqual.getName() + " " + nameEqual.getBirthDate().toString() + 
+                    " " + nameEqual.getOwner();
+                    System.out.println(present);
+                    targetIndex = n;
+                    count ++;
+                }
+            }
+            if(count == 0) {}
+            return equalType.get(targetIndex);
+            // reveal.inform(wantName);
         }
-
         // Заглушка
-        return equalType.get(count -1);
+
 
     }
 }

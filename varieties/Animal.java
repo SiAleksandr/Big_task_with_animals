@@ -80,6 +80,10 @@ public abstract class Animal {
 
     public void addCommand(String command) {}
 
+    public String getCommands () {
+        return null;
+    }
+
     public String toString() {
         String nameModified = name.replace(' ', '|');
         String ownerModified = owner.replace(' ', '|');

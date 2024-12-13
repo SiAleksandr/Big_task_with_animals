@@ -19,6 +19,11 @@ public class Donkey extends PackAnimal {
         donkeyCommands += " " + command;
     }
 
+    @Override
+    public String getCommands () {
+        return donkeyCommands;
+    }
+
     public String toString() {
         String commandsModified = donkeyCommands.replace(' ', '|');
         return super.toString() + " " + commandsModified;
