@@ -72,9 +72,16 @@ public class Engine {
                         }
                     case 2:
                         try {
-                            Animal target = search(functional.collection);
-                            reveal.inform(target.getId() + " " + target.getType() + 
-                            " " + target.getName() + "; " + "Commands: " + target.getCommands());
+                            Integer targetIndex = search(functional.collection);
+                            if(targetIndex == null) {
+                                throw new Exception();
+                            }
+                            else {
+                                // !!!Начать с этого места в это воскресенье!!!
+                                Animal target = functional.collection.get(targetIndex);
+                                reveal.inform(target.getId() + " " + target.getType() + 
+                                " " + target.getName() + "; " + "Commands: " + target.getCommands());
+                            }
                         }
                         catch (Exception e) {
                             reveal.inform("adding a command is canceled.");
@@ -119,7 +126,7 @@ public class Engine {
         invitation = "\nEnter the owner of this animal -> ";
         name = reveal.getWords(invitation);
         target.setOwner(name);
-        reveal.inform("");
+        // reveal.inform("");
         LocalDate birthDate = enterValidDate();
         target.setBirthDate(birthDate);
         Integer newId = functional.source.setIdForNew(functional.collection, target);
@@ -158,55 +165,96 @@ public class Engine {
         }
     }
 
-    private Animal search (ArrayList<Animal> allAnimals) throws Exception {
-        ArrayList<Animal> allTypes = constructTypes();
-        while (true) {   
-            String  descriptionForCancel = "Cancel the search";
-            String invitation = "Enter a number to search such type -> ";
-            Integer choice = getNumOfTipe(allTypes, descriptionForCancel, invitation);
-            if (choice == 0) {
-                throw new Exception();
-            }
-            String wantType = allTypes.get(choice - 1).getType();
-            ArrayList<Animal> equalType = new ArrayList<>();
-            for(int i = 0; i < allAnimals.size(); i++) {
-                if (allAnimals.get(i).getType().equals(wantType)) {
-                    Animal item = allAnimals.get(i);
-                    String output = item.getId() + " " + wantType + " " + item.getName() + 
-                    " " + item.getBirthDate().toString() + " " + item.getOwner();
-                    System.out.println(output);
-                    equalType.add(item);
-                }
-            }
-            if (equalType.size() == 0) {
-                reveal.inform("there is not a single animal of this type yet.\n");
-                throw new Exception();
-            }
-            invitation = "Enter the animal's name -> ";
-            String wantName = reveal.getWords(invitation);
-            int targetIndex = -1;
-            int count = 0;
-            for (int n = 0; n < equalType.size(); n++) {
-                if (equalType.get(n).getName().equals(wantName)) {
-                    Animal nameEqual = equalType.get(n);
-                    String present = nameEqual.getId() + " " + wantType + 
-                    " " + nameEqual.getName() + " " + nameEqual.getBirthDate().toString() + 
-                    " " + nameEqual.getOwner();
-                    System.out.println(present);
-                    targetIndex = n;
-                    count ++;
-                }
-            }
-            if(count == 0) {}
-            return equalType.get(targetIndex);
-            // reveal.inform(wantName);
+    private Integer search (ArrayList<Animal> allAnimals) throws Exception {
+        ArrayList<Animal> allTypes = constructTypes();  
+        String  descriptionForCancel = "Cancel the search";
+        String invitation = "Enter a number to search such type -> ";
+        Integer choice = getNumOfTipe(allTypes, descriptionForCancel, invitation);
+        if (choice == 0) {
+            throw new Exception();
         }
-        // Заглушка
+        String wantType = allTypes.get(choice - 1).getType();
+        ArrayList<Integer> possible = new ArrayList<>();
+        for(int i = 0; i < allAnimals.size(); i++) {
+            if (allAnimals.get(i).getType().equals(wantType)) {
+                Animal item = allAnimals.get(i);
+                String output = item.getId() + " " + wantType + " " + item.getName() + 
+                " " + item.getBirthDate().toString() + " " + 
+                item.getOwner() + " " + item.getCommands();
+                System.out.println(output);
+                possible.add(i);
+            }
+        }
+        if (possible.size() == 0) {
+            reveal.inform("there is not a single animal of this type yet.\n");
+            throw new Exception();
+        }
+        invitation = "Enter the animal's name -> ";
+        String wantName = reveal.getWords(invitation);
+        Integer resultIndex = null;
+        int count = 0;
+        Integer auxiliary = null;
+        for (int n = 0; n < possible.size(); n++) {
+            if (allAnimals.get(possible.get(n)).getName().equals(wantName)) {
+                if (count > 0) {
+                    if (count == 1) {
+                        Animal previousSuitable = allAnimals.get(possible.get(auxiliary));
+                        String present = previousSuitable.getId() + " " + wantType + 
+                        " " + wantName + " " + previousSuitable.getBirthDate().toString() + 
+                        " " + previousSuitable.getOwner() + previousSuitable.getCommands();
+                        reveal.inform(present);
+                    }
+                    Animal suitable = allAnimals.get(possible.get(n));
+                    String current = suitable.getId() + " " + wantType + 
+                    " " + wantName + " " + suitable.getBirthDate().toString() + 
+                    " " + suitable.getOwner() + suitable.getCommands();
+                    reveal.inform(current);
+                    count++;
+                }
+                else if (count == 0) {
+                    auxiliary = possible.get(n);
+                    resultIndex = possible.get(n);
+                    count++;
+                }
+            }
+        }
+        if(resultIndex == null) {
+            reveal.inform("there is not a single animal of this type that name");
 
-
+        }
+        int clear = 1;
+        if (count > clear) {
+            Integer targetId;
+            boolean control = false;
+            invitation = "Enter the ID of the desired animal -> ";
+            int minSuitable = 0;
+            int maxSituable = allAnimals.size() - 1;
+            while (!control) {
+                targetId = reveal.getValidNumber(invitation, minSuitable, maxSituable);
+                int k = 0;
+                while (k < possible.size()) {
+                    if (allAnimals.get(possible.get(k)).getId() == targetId) {
+                        resultIndex = possible.get(k);
+                        k = possible.size(); //Чтобы выйти из цикла
+                        control = true;
+                    }
+                    else k++;
+                }
+                if (!control) {
+                    reveal.inform("There is not a single animal of this type with");
+                    reveal.inform("that name and ID. Press Enter to choice ID again,");
+                    String decision = reveal.getWords("or type the letter Q to go the main menu -> ");
+                    decision = decision.toUpperCase();
+                    if (decision.equals("Q")) {
+                        throw new Exception();
+                    }
+                }
+            }
+        }
+        return resultIndex;
     }
 }
-
+// There is not a single animal of this type with that name.
     // public Animal search (ArrayList<Animal> allAnimals) {}
     // Искать по типу и имени, если что, показать id
 

@@ -76,6 +76,10 @@ public abstract class Animal {
         this.seat = seat;
     }
 
+    // public Integer getSeat() {
+    //     return seat;
+    // }
+
     public void setCommands(String commands) {}
 
     public void addCommand(String command) {}

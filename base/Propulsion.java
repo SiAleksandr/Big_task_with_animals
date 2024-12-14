@@ -23,14 +23,11 @@ public class Propulsion {
     public void setAnimalList (ArrayList<Animal> animalList) {
         this.collection = animalList;
     }
+    public ArrayList<Animal> getCollection () {
+        return collection;
+    }
 
     public void addAnimal (Animal target) {        
         collection.add(target);
-
-// придумать, как присвоить petId, например и seat для списка из Collector
-    }
-
-    public ArrayList<Animal> getCollection () {
-        return collection;
     }
 }

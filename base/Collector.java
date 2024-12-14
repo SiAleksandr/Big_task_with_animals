@@ -78,11 +78,11 @@ public class Collector {
         for (int a = 0; a < animalList.size(); a++) {
             if (animalList.get(a).getGroupId() == item.getGroupId()) {
                 if (animalList.get(a).getId() > maxId) {
-                    maxId = animalList.get(a).getId();
+                    maxId = animalList.get(a).getId() + 1;
                 }
             }
         }
-        return maxId + 1;
+        return maxId;
     }
 
     public void saveAll () {
