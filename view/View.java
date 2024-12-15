@@ -9,11 +9,15 @@ import base.Propulsion;
 
 public class View {
 
-    public Engine process;
+    Engine process;
 
-    public View(Engine process) {
-        this.process = new Engine();
-}
+    public View() {}
+
+    public void buttonClick() {
+        Engine process = new Engine(this);
+        this.process = process;
+        process.run();
+    }
 
     public void inform (String message) {
         System.out.println(message);

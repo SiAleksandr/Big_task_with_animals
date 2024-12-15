@@ -20,9 +20,9 @@ public class Engine {
     public Propulsion functional;
     public View reveal;
 
-    public Engine() {
+    public Engine(View view) {
         functional = new Propulsion();
-        reveal = new View(this);
+        reveal = view;
     }
 
     public ArrayList<Animal> constructTypes() {
@@ -61,7 +61,7 @@ public class Engine {
                 String invitationString = "Enter the number of action -> ";
                 Integer choice = reveal.getValidNumber(invitationString, minMenuValue, linesNow);
                 switch (choice) {
-                    case 0:
+                    case 0: 
                         return;
                     case 1:
                         try {
@@ -70,6 +70,7 @@ public class Engine {
                         } catch (Exception e) {
                             reveal.inform("adding a new animal is canceled");
                         }
+                        break;
                     case 2:
                         try {
                             Integer targetIndex = search(functional.collection);
@@ -79,16 +80,23 @@ public class Engine {
                             else {
                                 // !!!Начать с этого места в это воскресенье!!!
                                 Animal target = functional.collection.get(targetIndex);
-                                reveal.inform(target.getId() + " " + target.getType() + 
-                                " " + target.getName() + "; " + "Commands: " + target.getCommands());
+                                reveal.inform("Selected animal");
+                                String description = target.getGroupId() + " " +
+                                    target.getId() + target.getType() + " " + 
+                                    target.getName() + " " + target.getOwner() + 
+                                    " " + target.birthDate.toString();
+                                reveal.inform(description);
+                                reveal.inform("The animal knows the commands: " + 
+                                target.getCommands());
                             }
                         }
                         catch (Exception e) {
-                            reveal.inform("adding a command is canceled.");
+                            // reveal.inform("adding a command is canceled.");
+                            reveal.inform("the search is over.");
                         }
                         break;
-                    default:
-                        break;
+                    // default:
+                    //     break;
                 }
             }
 
@@ -219,7 +227,7 @@ public class Engine {
             }
         }
         if(resultIndex == null) {
-            reveal.inform("there is not a single animal of this type that name");
+            reveal.inform("there is not a single animal of this type that name.");
 
         }
         int clear = 1;
