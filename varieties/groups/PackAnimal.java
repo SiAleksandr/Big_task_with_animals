@@ -1,24 +1,15 @@
 package varieties.groups;
 
-import varieties.Animal;
+import varieties.*;
 
 public abstract class PackAnimal extends Animal {
-    public Integer packAnimalId;
-    public PackAnimal(String type) {
-        super(type);
+
+    public PackAnimal(Informer one) {
+        super(one);
     }
 
     @Override
-    public void setId(Integer id) {
-        packAnimalId = id;
-    }
-
-    @Override
-    public Integer getId() {
-        return packAnimalId;
-    }
-
-    public String toString() {
-        return groupId + " " + packAnimalId + " " +  super.toString();
+    public String getGroup() {
+        return "PackAnimal";
     }
 }

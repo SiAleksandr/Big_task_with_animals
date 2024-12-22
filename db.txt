@@ -1,7 +1,7 @@
-0 0 Pet Cat Pussy Sasha|Petrov 2015-02-23 Sit|Pounce
-1 1 PackAnimal Camel Smor Karabas|barabas 2012-05-17 Walk|CarryLoad
-0 2 PackAnimal Donkey Kozo Sancho 2020-01-19 Walk|CarryLoad|Bray
+0 Pet Cat Pussy Sasha|Petrov 2015-02-23 Sit|Pounce
+2 PackAnimal Camel Smor Karabas|barabas 2012-05-17 Walk|CarryLoad
+3 PackAnimal Donkey Kozo Sancho 2020-01-19 Walk|CarryLoad|Bray
 ЛяЛя ля ля ля
-0 1 Pet Cat Inessa Nina|Sikalova 2017-10-13 Scratch|Meow
-0 2 Pet Dog June Nina|Sikalova 2011-07=07 Sit|Paw|Bark
-0 3 Pet Cat Inessa Alexandr|Sikalov 2018-11-26 Meow|Scratch|Jump
+4 Pet Cat Inessa Nina|Sikalova 2017-10-13 Scratch|Meow
+5 Pet Dog June Nina|Sikalova 2011-07-07 Sit|Paw|Bark
+6 Pet Cat Inessa Alexandr|Sikalov 2018-11-26 Meow|Scratch|Jump

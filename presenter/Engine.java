@@ -2,6 +2,7 @@ package presenter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.HashMap;
 import java.lang.Exception;
 
@@ -36,8 +37,8 @@ public class Engine {
         return allTypes;
     }
 
-    private HashMap<String, String> constructAccordance() {
-        HashMap<String, String> accordance = new HashMap<>();
+    private Map<String, String> constructAccordance() {
+        Map<String, String> accordance = new HashMap<>();
         accordance.put("Cat", "Pet");
         accordance.put("Dog", "Pet");
         accordance.put("Hamster", "Pet");
@@ -54,6 +55,11 @@ public class Engine {
             ArrayList<Animal> allTypes = constructTypes();
             functional.source.getReady(accordance, allTypes);
             ArrayList<Animal> main = functional.source.rebornAll(accordance, allTypes);
+            // test {
+            // for(int t = 0; t < main.size(); t++) {
+            //     System.out.println(main.get(t).toString());
+            // }
+            // test }
             functional.setAnimalList(main);
             while(true) {
                 int minMenuValue = 0;
@@ -181,18 +187,26 @@ public class Engine {
         if (choice == 0) {
             throw new Exception();
         }
+
+        // тест {
+        for(int t = 0; t < allAnimals.size(); t++) {
+            System.out.println(allAnimals.get(t).toString());
+        }
+        // тест }
         String wantType = allTypes.get(choice - 1).getType();
         ArrayList<Integer> possible = new ArrayList<>();
         for(int i = 0; i < allAnimals.size(); i++) {
             if (allAnimals.get(i).getType().equals(wantType)) {
-                Animal item = allAnimals.get(i);
-                String output = item.getId() + " " + wantType + " " + item.getName() + 
-                " " + item.getBirthDate().toString() + " " + 
-                item.getOwner() + " " + item.getCommands();
+                // Animal item = allAnimals.get(i);
+                String output = allAnimals.get(i).getId() + " " + wantType + 
+                " " + allAnimals.get(i).getName() + " " +
+                allAnimals.get(i).getBirthDate().toString() + " " + 
+                allAnimals.get(i).getOwner() + " " + allAnimals.get(i).getCommands();
                 System.out.println(output);
                 possible.add(i);
             }
         }
+
         if (possible.size() == 0) {
             reveal.inform("there is not a single animal of this type yet.\n");
             throw new Exception();

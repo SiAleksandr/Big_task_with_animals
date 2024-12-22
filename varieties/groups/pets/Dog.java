@@ -1,31 +1,15 @@
 package varieties.groups.pets;
 
 import varieties.groups.Pet;
+import varieties.Informer;
 
 public class Dog extends Pet {
-    public String dogCommands;
-
-    public Dog(String type) {
-        super(type);
+    public Dog(Informer one) {
+        super(one);
     }
     
     @Override
-    public void setCommands(String Commands) {
-        dogCommands = Commands;
-    }
-
-    @Override
-    public void addCommand (String newCommand) {
-        dogCommands += newCommand;
-    }
-
-    @Override
-    public String getCommands () {
-        return dogCommands;
-    }
-
-    public String toString() {
-        String commandsModified = dogCommands.replace(' ', '|');
-        return super.toString() + " " + commandsModified;
+    public String getType() {
+        return "Dog";
     }
 }

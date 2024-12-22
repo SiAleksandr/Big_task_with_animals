@@ -1,25 +1,17 @@
 package varieties.groups;
 
+import java.time.LocalDate;
+
 import varieties.Animal;
+import varieties.Informer;
 
 public abstract class Pet extends Animal{
-    public Integer petId;
-
-    public Pet(String type) {
-        super(type);
+    public Pet(Informer one) {
+        super(one);
     }
 
     @Override
-    public void setId(Integer id) {
-        petId = id;
-    }
-
-    @Override
-    public Integer getId() {
-        return petId;
-    }
-
-    public String toString() {
-        return groupId + " " + petId + " " + super.toString();
+    public String getGroup() {
+        return "Pet";
     }
 }

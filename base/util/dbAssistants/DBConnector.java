@@ -3,7 +3,7 @@ package base.util.dbAssistants;
 import java.io.File;
 
 public class DBConnector {
-    public static String fileName;
+    private static String fileName;
     {fileName = "db.txt";}
     public static void createDb() throws Exception {
         File db = new File(fileName);
@@ -13,6 +13,10 @@ public class DBConnector {
         else {
             System.out.println("file db.txt already exists");
         }
+    }
+
+    public static String getFileName() {
+        return fileName;
     }
     // System.out.println("An error occurred while file using.");
 }

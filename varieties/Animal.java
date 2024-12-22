@@ -1,97 +1,57 @@
 package varieties;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Animal {
-    public Integer seat;
-    public Integer groupId;
-    public String groupName;
-    public String type;
-    public String name;
-    public String owner;
-    public LocalDate birthDate;
+    private Long id;
+    private String name;
+    private LocalDate birthDate;
+    private String commands;
+    private Long seat;
 
-    public Animal(String type) {
-        this.type = type;
-        this.seat = null;
+    // public Animal(Long id, String name, LocalDate birthDate, String commands, Long seat) {
+    public Animal(Informer one) {
+        this.id = one.id;
+        this.name = one.name;
+        this.birthDate = one.birthDate;
+        this.commands = one.commands;
+        this.seat = one.seat;
     }
 
-    public String getType () {
-        return type;
+    public Long getId() {
+        return id;
     }
 
-    public void setGroup(HashMap<String, String> accordance) {
-        groupName = accordance.get(type);
+    public String getGroup() {
+        return null;
     }
 
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupId(HashMap<Integer, String> groups) {
-        for(Integer i = 0; i < groups.size(); i++) {
-            if(groups.get(i).equals(groupName)) {
-                groupId = i;
-                i = groups.size();
-            }
-        }
-    }
-
-    public Integer getGroupId () {
-        return groupId;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public String getType() {
+        return null;
     }
 
     public String getName () {
         return name;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public String getOwner () {
-        return owner;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setId(Integer id) {}
-
-    public Integer getId() {
-        return null;
+    public void addCommand(String command) {
+        commands += command;
     }
 
-    public void setSeat(Integer seat) {
-        this.seat = seat;
+    public String getCommands() {
+        return commands;
     }
 
-    // public Integer getSeat() {
-    //     return seat;
-    // }
-
-    public void setCommands(String commands) {}
-
-    public void addCommand(String command) {}
-
-    public String getCommands () {
-        return null;
+    public Long getSeat() {
+        return seat;
     }
 
     public String toString() {
-        String nameModified = name.replace(' ', '|');
-        String ownerModified = owner.replace(' ', '|');
-        return groupName + " " + type + " " + nameModified + " "
-        + ownerModified + " " + birthDate.toString();
+        return getId().toString() + " " + getGroup() + " " + getType() + " " 
+        +  name + " " + birthDate.toString() + " " + commands;
     }
 }

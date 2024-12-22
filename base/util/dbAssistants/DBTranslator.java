@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.util.List;
 import java.util.ArrayList;
 
 public class DBTranslator {
@@ -11,8 +12,8 @@ public class DBTranslator {
     public DBTranslator(String fileName) {
         this.fileName = fileName;
     }
-    public ArrayList<String> getList(String fileName) throws IOException {
-        ArrayList<String> linesList = new ArrayList<>();
+    public List<String> getList(String fileName) throws IOException {
+        List<String> linesList = new ArrayList<>();
         String line;
         FileReader fr = new FileReader(fileName);
         BufferedReader br = new BufferedReader(fr);
@@ -27,7 +28,7 @@ public class DBTranslator {
         fr.close();
         return linesList;
     }
-    public void writeFile(ArrayList<String> list, boolean continuation) throws IOException {
+    public void writeFile(List<String> list, boolean continuation) throws IOException {
         FileWriter fw = new FileWriter(this.fileName, continuation);
         for (int i = 0; i < list.size(); i++) {
             fw.write(list.get(i));
