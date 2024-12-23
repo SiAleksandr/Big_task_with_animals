@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Map;
 
 import presenter.Engine;
 import varieties.Animal;
@@ -39,12 +40,12 @@ public class View {
         return lineCount;
     }
 
-    public int numberedTypesShow (ArrayList<Animal> allTypes, String zeroNumberMessage) {
+    public int numberedTypesShow (String[] allTypes, String zeroNumberMessage) {
         int index = 0;
         System.out.println(" " + index + " - " + zeroNumberMessage);
-        while (index < allTypes.size()) {
+        while (index < allTypes.length) {
             int numberForView = index + 1; 
-            String description = " " + numberForView + " - " + allTypes.get(index).getType();
+            String description = " " + numberForView + " - " + allTypes[index];
             System.out.println(description);
             index ++;
         }
@@ -53,7 +54,7 @@ public class View {
 
     public Integer getValidNumber (String invitation, int min, int max) {
         String input = prompt(invitation);
-        if (process.functional.source.toolkit.isDigit(input)) {
+        if (isDigit(input)) {
             Integer target = Integer.parseInt(input);
             if ((target >= min) && (target <= max)) {
                 return target;
@@ -61,6 +62,15 @@ public class View {
         }
         invitation = "Not valid input. Enter valid number -> ";
         return getValidNumber(invitation, min, max);
+    }
+
+    private boolean isDigit (String value) {
+        try {
+            Integer num = Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public String getWords(String invitation) {

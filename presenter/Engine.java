@@ -20,29 +20,38 @@ import varieties.groups.pets.Dog;
 import varieties.groups.pets.Hamster;
 
 public class Engine {
+    private String[] numberedTypes;
+    private Map<String, String> accordance;
 
     public Service serve;
     public View offer;
 
     public Engine(View view) {
         offer = view;
-        serve = new Service(offer);
+        serve = new Service();
     }
 
-    private Map<String, String> constructAccordance() {
+    private void constructAccordance() {
+        int typesCount = 6;
+        numberedTypes = new String[typesCount];
         Map<String, String> accordance = new HashMap<>();
         accordance.put("Cat", "Pet");
+        numberedTypes[0] = "Cat";
         accordance.put("Dog", "Pet");
+        numberedTypes[1] = "Dog";
         accordance.put("Hamster", "Pet");
+        numberedTypes[2] = "Hamster";
         accordance.put("Horse", "PackAnimal");
+        numberedTypes[3] = "Horse";
         accordance.put("Camel", "PackAnimal");
+        numberedTypes[4] = "Camel";
         accordance.put("Donkey", "PackAnimal");
-        return accordance;
+        numberedTypes[5] = "Donkey";
     }
 
     public void run () {
         offer.inform("storage information:");
-        if (!functional.start()) {
+        if (!serve.source.startWork()) {
             offer.inform("the storage creation failed.");
             offer.inform("there is now the end of program.");
             return;
