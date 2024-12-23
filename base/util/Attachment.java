@@ -1,4 +1,4 @@
-package presenter;
+package base.util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -10,11 +10,10 @@ import java.util.Map;
 import varieties.*;
 import varieties.groups.pets.*;
 import varieties.groups.packAnimals.*;
-import base.Collector;
-import base.util.Check;
 
 public class Attachment {
     public Check check;
+
 
     public Attachment() {
         check = new Check();

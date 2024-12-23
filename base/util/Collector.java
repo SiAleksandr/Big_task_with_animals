@@ -1,6 +1,5 @@
-package base;
+package base.util;
 
-import base.util.Check;
 import base.util.dbAssistants.*;
 
 import java.io.IOException;
@@ -11,7 +10,6 @@ import java.util.HashMap;
 import varieties.Animal;
 
 public class Collector {
-    public List<String> corruptedData;
     private DBConnector connector;
     private DBTranslator translator;
 

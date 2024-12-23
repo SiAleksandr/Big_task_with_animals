@@ -3,10 +3,13 @@ package presenter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
+
+import base.Service;
+import base.util.Collector;
+
 import java.util.HashMap;
 import java.lang.Exception;
 
-import base.Propulsion;
 import view.View;
 import varieties.Animal;
 import varieties.groups.packAnimals.Camel;
@@ -18,23 +21,12 @@ import varieties.groups.pets.Hamster;
 
 public class Engine {
 
-    public Propulsion functional;
-    public View reveal;
+    public Service serve;
+    public View offer;
 
     public Engine(View view) {
-        functional = new Propulsion();
-        reveal = view;
-    }
-
-    public ArrayList<Animal> constructTypes() {
-        ArrayList<Animal> allTypes = new ArrayList<>();
-        allTypes.add(new Cat("Cat"));
-        allTypes.add(new Dog("Dog"));
-        allTypes.add(new Hamster("Hamster"));
-        allTypes.add(new Horse("Horse"));
-        allTypes.add(new Camel("Camel"));
-        allTypes.add(new Donkey("Donkey"));
-        return allTypes;
+        offer = view;
+        serve = new Service(offer);
     }
 
     private Map<String, String> constructAccordance() {
@@ -49,33 +41,27 @@ public class Engine {
     }
 
     public void run () {
-        reveal.inform("storage information:");
-        if (functional.start()) {
-            HashMap<String, String> accordance = constructAccordance();
-            ArrayList<Animal> allTypes = constructTypes();
-            functional.source.getReady(accordance, allTypes);
-            ArrayList<Animal> main = functional.source.rebornAll(accordance, allTypes);
-            // test {
-            // for(int t = 0; t < main.size(); t++) {
-            //     System.out.println(main.get(t).toString());
-            // }
-            // test }
-            functional.setAnimalList(main);
-            while(true) {
-                int minMenuValue = 0;
-                int linesNow = reveal.showMenu();
-                String invitationString = "Enter the number of action -> ";
-                Integer choice = reveal.getValidNumber(invitationString, minMenuValue, linesNow);
-                switch (choice) {
-                    case 0: 
-                        return;
-                    case 1:
-                        try {
-                            Animal target = describeNewAnimal();
-                            functional.addAnimal(target);
-                        } catch (Exception e) {
-                            reveal.inform("adding a new animal is canceled");
-                        }
+        offer.inform("storage information:");
+        if (!functional.start()) {
+            offer.inform("the storage creation failed.");
+            offer.inform("there is now the end of program.");
+            return;
+        }
+        while(true) {
+            int minMenuValue = 0;
+            int linesNow = offer.showMenu();
+            String invitationString = "Enter the number of action -> ";
+            Integer choice = offer.getValidNumber(invitationString, minMenuValue, linesNow);
+            switch (choice) {
+                case 0: 
+                    return;
+                case 1:
+                    // try {
+                    //     Animal target = describeNewAnimal();
+                    //     functional.addAnimal(target);
+                    // } catch (Exception e) {
+                    //     reveal.inform("adding a new animal is canceled");
+                    // }
                         break;
                     case 2:
                         try {
