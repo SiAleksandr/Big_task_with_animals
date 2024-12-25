@@ -22,17 +22,14 @@ public class Attachment {
     public boolean lineCheck (String line,
         Map<String, String> groupAccordance) {
         String[] dataItems = line.split(" ");
-        int correctAmount = 6;
+        int correctAmount = 7;
         if (dataItems.length == correctAmount) {
             if (check.isDigit(dataItems[0])) {
                 if (groupAccordance.containsValue(dataItems[1])) {
                     if (groupAccordance.containsKey(dataItems[2])) {
                         if (groupAccordance.get(dataItems[2]).equals(dataItems[1])) {
-                            try {
-                                LocalDate.parse(dataItems[4]);
+                            if (check.isDate(dataItems[5])) {
                                 return true;
-                            } catch (DateTimeParseException e) {
-                                return false;
                             }
                         }
                     }
@@ -41,12 +38,12 @@ public class Attachment {
         }
         return false;
     }
-    public Animal reborn (String line, Long index) {
+    public Animal reborn (String line) {
         String[] dataArray = line.split(" ");
         Long id = Long.parseLong(dataArray[0]);
-        LocalDate birthDate = LocalDate.parse(dataArray[4]);
-        Informer informer = new Informer(id, dataArray[3], 
-                birthDate, dataArray[5], index);
+        LocalDate birthDate = LocalDate.parse(dataArray[5]);
+        Informer informer = new Informer(id, dataArray[3],
+                dataArray[4], birthDate, dataArray[6]);
         String classType = dataArray[2];
         switch (classType) {
             case ("Cat"):

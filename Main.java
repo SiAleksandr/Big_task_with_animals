@@ -1,7 +1,6 @@
 import varieties.Animal;
 import varieties.groups.pets.*;
 import varieties.groups.packAnimals.*;
-import base.util.Toolkit;
 import base.*;
 import view.View;
 
@@ -17,20 +16,21 @@ import java.time.format.DateTimeParseException;
 
 public class Main {
     public static void main(String[] args) {
-
-        Map<String, String> accordance = new HashMap<>();
-
+        View view = new View();
+        view.buttonClick();
+    }
+}
         // ArrayList<Animal> allTypes = getTypes();
 
 
         // HashMap<String, String> accordance = new HashMap<>();
 
-        accordance.put("Cat", "Pet");
-        accordance.put("Dog", "Pet");
-        accordance.put("Hamster", "Pet");
-        accordance.put("Horse", "PackAnimal");
-        accordance.put("Camel", "PackAnimal");
-        accordance.put("Donkey", "PackAnimal");
+        // accordance.put("Cat", "Pet");
+        // accordance.put("Dog", "Pet");
+        // accordance.put("Hamster", "Pet");
+        // accordance.put("Horse", "PackAnimal");
+        // accordance.put("Camel", "PackAnimal");
+        // accordance.put("Donkey", "PackAnimal");
     
 
         // cat1.setCommands("сидеть мяукать");
@@ -42,15 +42,6 @@ public class Main {
         // System.out.println(horse1.toString());
 
     // protected static ArrayList<Animal> getTypes() {
-        
-        AnimalList allTypes = new AnimalList(new Cat("Cat"));
-        allTypes.add(new Dog("Dog"));
-        allTypes.add(new Hamster("Hamster"));
-        allTypes.add(new Horse("Horse"));
-        allTypes.add(new Camel("Camel"));
-        allTypes.add(new Donkey("Donkey"));
-        
-
         // List<String> bl = new ArrayList<>();
         // String line = "Kh hdh jjfd";
         // bl.add(line);
@@ -92,40 +83,40 @@ public class Main {
         // System.out.println(a.getSeat());
         // System.out.println(a.toString());      
     //     return allTypes;
-    }
+    // }
 
-    public static AnimalList rebornAll(Map<String, String> accordance,
-    AnimalList allKinds, List<String> bigList) throws Exception {
-        if(bigList.size() == 0) throw new Exception();
-        int current = -1;
-        int i = 0;
-        while(i < bigList.size()) {
-            if(lineCheck(bigList.get(i), accordance)) {
-                current = i;
-                i = bigList.size();
-            }
-            else i++;
-        }
-        if(current == -1) throw new Exception();
-        String lineFirst = bigList.get(current);
-        Long index = Long.valueOf(current);
-        Animal animalFirst = reborn(lineFirst, allKinds, accordance, index);
-        animalFirst.setMark();
-        AnimalList mainList = new AnimalList(animalFirst);
-        current++;
-        index++;
-        while(current < bigList.size()) {
-            if(lineCheck(bigList.get(current), accordance)) {
-                Animal item = reborn(bigList.get(current),
-                allKinds, accordance, index);
-                item.setMark();
-                mainList.get(mainList.size() - 1).setMark();
-                mainList.add(item);
-            }
-            current++;
-            index++;
+    // public static AnimalList rebornAll(Map<String, String> accordance,
+    // AnimalList allKinds, List<String> bigList) throws Exception {
+    //     if(bigList.size() == 0) throw new Exception();
+    //     int current = -1;
+    //     int i = 0;
+    //     while(i < bigList.size()) {
+    //         if(lineCheck(bigList.get(i), accordance)) {
+    //             current = i;
+    //             i = bigList.size();
+    //         }
+    //         else i++;
+    //     }
+    //     if(current == -1) throw new Exception();
+    //     String lineFirst = bigList.get(current);
+    //     Long index = Long.valueOf(current);
+    //     Animal animalFirst = reborn(lineFirst, allKinds, accordance, index);
+    //     animalFirst.setMark();
+    //     AnimalList mainList = new AnimalList(animalFirst);
+    //     current++;
+    //     index++;
+    //     while(current < bigList.size()) {
+    //         if(lineCheck(bigList.get(current), accordance)) {
+    //             Animal item = reborn(bigList.get(current),
+    //             allKinds, accordance, index);
+    //             item.setMark();
+    //             mainList.get(mainList.size() - 1).setMark();
+    //             mainList.add(item);
+    //         }
+    //         current++;
+    //         index++;
             // else corruptedData.add(bigList.get(index));
-        }
+        // }
         // ArrayList<Animal> results = new ArrayList<>();
         // for(Integer i = 0; i < suitable.size(); i++) {
         //     results.add(toolkit.reborn(bigList.get(suitable.get(i)),
@@ -135,74 +126,31 @@ public class Main {
         // for(Integer t = 0; t < results.size(); t++)
         // System.out.println(results.get(t));
         // test }
-        return mainList;
-    }
+    //     return mainList;
+    // }
 
-    public static Animal getAnimal(AnimalList types, String typeName) {
-        int target = 0;
-        int i = 0;
-        while (i < types.size()) {
-            if (types.get(i).getType().equals(typeName)) {
-                target = i;
-                i = types.size(); // Чтобы выйти из цикла
-            }
-            else i++;
-        }
-        return types.get(target);
-    }
+    // public static Animal getAnimal(AnimalList types, String typeName) {
+    //     int target = 0;
+    //     int i = 0;
+    //     while (i < types.size()) {
+    //         if (types.get(i).getType().equals(typeName)) {
+    //             target = i;
+    //             i = types.size(); // Чтобы выйти из цикла
+    //         }
+    //         else i++;
+    //     }
+    //     return types.get(target);
+    // }
 
-    public static Animal reborn (String line, AnimalList allTypes,
-            Map<String, String> groupAccordance, Long index) {
-        String[] dataArray = line.split(" ");
-        Animal target = getAnimal(allTypes, dataArray[2]);
-        target.setId(Long.parseLong(dataArray[0]));
-        target.setGroup(groupAccordance);
-        dataArray[3] = dataArray[3].replace('|', ' ');
-        target.setName(dataArray[3]);
-        dataArray[4] = dataArray[4].replace('|', ' ');
-        target.setOwner(dataArray[4]);
-        String[] dateNumbers = dataArray[5].split("-");   
-        int year = Integer.parseInt(dateNumbers[0]);
-        int month = Integer.parseInt(dateNumbers[1]);
-        int day = Integer.parseInt(dateNumbers[2]);
-        LocalDate birthDate = LocalDate.of(year, month, day);
-        target.setBirthDate(birthDate);
-        dataArray[6] = dataArray[6].replace('|', ' ');
-        target.setCommands(dataArray[6]);
-        target.setSeat(index);
-        return target;
-    }
 
-    public static boolean lineCheck (String line,
-        Map<String, String> groupAccordance) {
-        String[] dataItems = line.split(" ");
-        int correctAmount = 7;
-        if (dataItems.length == correctAmount) {
-            if (isDigit(dataItems[0])) {
-                if (groupAccordance.containsValue(dataItems[1])) {
-                    if (groupAccordance.containsKey(dataItems[2])) {
-                        if (groupAccordance.get(dataItems[2]).equals(dataItems[1])) {
-                            try {
-                                LocalDate.parse(dataItems[5]);
-                                return true;
-                            } catch (DateTimeParseException e) {
-                                return false;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
 
-    public static boolean isDigit (String subject) {
-        try {
-            Integer.parseInt(subject);
-            return true;
-        }
-        catch (NumberFormatException e) {
-            return false;
-        }
-    }
-}
+    // public static boolean isDigit (String subject) {
+    //     try {
+    //         Integer.parseInt(subject);
+    //         return true;
+    //     }
+    //     catch (NumberFormatException e) {
+    //         return false;
+    //     }
+    // }
+// }

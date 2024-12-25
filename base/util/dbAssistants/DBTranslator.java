@@ -12,7 +12,7 @@ public class DBTranslator {
     public DBTranslator(String fileName) {
         this.fileName = fileName;
     }
-    public List<String> getList(String fileName) throws IOException {
+    public List<String> getList() throws IOException {
         List<String> linesList = new ArrayList<>();
         String line;
         FileReader fr = new FileReader(fileName);

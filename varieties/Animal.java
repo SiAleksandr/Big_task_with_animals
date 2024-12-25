@@ -5,17 +5,17 @@ import java.util.Map;
 public abstract class Animal {
     private Long id;
     private String name;
+    private String gender;
     private LocalDate birthDate;
     private String commands;
-    private Long seat;
 
     // public Animal(Long id, String name, LocalDate birthDate, String commands, Long seat) {
     public Animal(Informer one) {
         this.id = one.id;
         this.name = one.name;
+        this.gender = one.gender;
         this.birthDate = one.birthDate;
         this.commands = one.commands;
-        this.seat = one.seat;
     }
 
     public Long getId() {
@@ -46,12 +46,8 @@ public abstract class Animal {
         return commands;
     }
 
-    public Long getSeat() {
-        return seat;
-    }
-
     public String toString() {
         return getId().toString() + " " + getGroup() + " " + getType() + " " 
-        +  name + " " + birthDate.toString() + " " + commands;
+        +  name + " " + gender + " " + birthDate.toString() + " " + commands;
     }
 }

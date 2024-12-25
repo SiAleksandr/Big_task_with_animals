@@ -2,6 +2,7 @@ package base.util;
 
 import java.time.LocalDate;
 import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
 
 import varieties.*;
 import varieties.groups.pets.*;
@@ -21,7 +22,7 @@ public class Check {
         }
     }
 
-    public boolean isDate (int year, int month, int dayOfMonth) {
+    public boolean IsDateElements (int year, int month, int dayOfMonth) {
         try {
             LocalDate.of(year, month, dayOfMonth);
             return true;
@@ -31,6 +32,17 @@ public class Check {
         }
     }
 
+    public boolean isDate (String mark) {
+        try {
+            LocalDate.parse(mark);
+            return true;
+        }
+        catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+}
     // @Override
     // public boolean lineCheck (String line,
     //     Map<String, String> groupAccordance) {
@@ -55,31 +67,31 @@ public class Check {
     //     return false;
     // }
 
-    public Animal reborn (String line, Long index) {
-        String[] dataArray = line.split(" ");
-        Long id = Long.parseLong(dataArray[0]);
-        LocalDate birthDate = LocalDate.parse(dataArray[4]);
-        Informer informer = new Informer(id, dataArray[3], 
-                birthDate, dataArray[5], index);
-        String classType = dataArray[2];
-        switch (classType) {
-            case ("Cat"):
-                return new Cat(informer);
+//     public Animal reborn (String line, Long index) {
+//         String[] dataArray = line.split(" ");
+//         Long id = Long.parseLong(dataArray[0]);
+//         LocalDate birthDate = LocalDate.parse(dataArray[4]);
+//         Informer informer = new Informer(id, dataArray[3], 
+//                 birthDate, dataArray[5], index);
+//         String classType = dataArray[2];
+//         switch (classType) {
+//             case ("Cat"):
+//                 return new Cat(informer);
 
-            case ("Dog"):
-                return new Dog(informer);
+//             case ("Dog"):
+//                 return new Dog(informer);
 
-            case ("Hamster"):
-                return new Hamster(informer);
+//             case ("Hamster"):
+//                 return new Hamster(informer);
 
-            case ("Horse"):
-                return new Horse(informer);
+//             case ("Horse"):
+//                 return new Horse(informer);
 
-            case ("Camel"):
-                 return new Camel(informer);
+//             case ("Camel"):
+//                  return new Camel(informer);
 
-            default:
-            return new Donkey(informer);
-        }
-    }
-}
+//             default:
+//             return new Donkey(informer);
+//         }
+//     }
+// }

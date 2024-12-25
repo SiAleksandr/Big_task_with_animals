@@ -1,12 +1,12 @@
 package view;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Map;
 
 import presenter.Engine;
 import varieties.Animal;
-import base.Propulsion;
 
 public class View {
 
@@ -15,8 +15,7 @@ public class View {
     public View() {}
 
     public void buttonClick() {
-        Engine process = new Engine(this);
-        this.process = process;
+        process = new Engine(this);
         process.run();
     }
 
@@ -66,7 +65,7 @@ public class View {
 
     private boolean isDigit (String value) {
         try {
-            Integer num = Integer.parseInt(value);
+            Integer.parseInt(value);
             return true;
         } catch (NumberFormatException e) {
             return false;
@@ -82,24 +81,13 @@ public class View {
         invitation = "Not valid input. Enter the required -> ";
         return getWords(invitation);
     }
-}
-/*
-    public void runAll() {
-        System.out.println("storage information:");
-        if (engine.checkStart()) {
-            while(true) {
-                System.out.println("\n 0. Save everything and exit");
-                System.out.println(" 1. Add new animal");
-                System.out.println(" 2. View commands executed by the animal");
-                System.out.println(" 3. Teach the animal new command(s)");
-                System.out.println(" 4. All animals by date of birth, starting from the oldest");
-            
 
-            }
+    public void printList(List<String> target) {
+        for(int i = 0; i < target.size(); i++) {
+            String line = target.get(i).replace('|', ' ');
+            System.out.println(line);
         }
-        else {
-            System.out.println("There is now the end of program.");
-            return;
-        }
-    } */
+    }
+}
+
 

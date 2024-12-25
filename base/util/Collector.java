@@ -30,9 +30,8 @@ public class Collector {
     }
 
     public List<String> readDB() {
-        String fileName = connector.getFileName();
         try {
-            List<String> currentList = translator.getList(fileName);
+            List<String> currentList = translator.getList();
             return currentList;
         } catch (IOException e) {
             System.out.println("file reading failed");
