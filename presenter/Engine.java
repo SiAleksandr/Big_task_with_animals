@@ -85,9 +85,9 @@ public class Engine {
                         try {
                             Animal target = search();
                             offer.inform("Here is an animal:");
-                            String finalView = target.toString().replace('|', ' ');
-                            offer.inform(finalView);
-                            offer.prompt("Press ENTER > ");
+                            offer.inform(target.toView());
+                            String commands = target.getCommands().replace('|', ' ');
+                            offer.prompt("COMMANDS (press ENTER): " + commands + " > ");
 
                         // try {
                         //     Integer targetIndex = search(functional.collection);
@@ -116,6 +116,12 @@ public class Engine {
                     case 3: {
                         try {
                             Animal pupil = search();
+                            offer.inform("Here is an animal:");
+                            offer.inform(pupil.toView());
+                            String newCommands = offer.prompt("Enter new commands => ");
+                            pupil.addCommand(newCommands);
+
+
                         } catch(Exception e) {
                             
                         }

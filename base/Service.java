@@ -7,6 +7,7 @@ import java.util.Map;
 
 import base.util.Attachment;
 import base.util.Collector;
+import varieties.Animal;
 
 public class Service {
     public Attachment transform;
@@ -71,5 +72,16 @@ public class Service {
             }
         }
         return target;
+    }
+
+    public void saveNewCommand(Animal target) {
+        String id = target.getId().toString();
+        for(int i = 0; i < bigList.size(); i++) {
+            String[] parts = bigList.get(i).split(" ");
+            if(parts[0].equals(id)) {
+                bigList.set(i, target.toString());
+                i = bigList.size();
+            }
+        }
     }
 }

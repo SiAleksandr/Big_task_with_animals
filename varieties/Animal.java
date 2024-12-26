@@ -50,4 +50,8 @@ public abstract class Animal {
         return getId().toString() + " " + getGroup() + " " + getType() + " " 
         +  name + " " + gender + " " + birthDate.toString() + " " + commands;
     }
+    
+    public String toView() {
+        return toString().replace('|', ' ');
+    }
 }
