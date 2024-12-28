@@ -38,8 +38,8 @@ public abstract class Animal {
         return birthDate;
     }
 
-    public void addCommand(String command) {
-        commands += command;
+    public void setCommands(String commands) {
+        this.commands = commands;
     }
 
     public String getCommands() {

@@ -88,27 +88,7 @@ public class Engine {
                             offer.inform(target.toView());
                             String commands = target.getCommands().replace('|', ' ');
                             offer.prompt("COMMANDS (press ENTER): " + commands + " > ");
-
-                        // try {
-                        //     Integer targetIndex = search(functional.collection);
-                        //     if(targetIndex == null) {
-                        //         throw new Exception();
-                        //     }
-                        //     else {
-                        //         // !!!Начать с этого места в это воскресенье!!!
-                        //         Animal target = functional.collection.get(targetIndex);
-                        //         reveal.inform("Here is an animal:");
-                        //         String description = target.getGroupId() + " " +
-                        //             target.getId() + target.getType() + " " + 
-                        //             target.getName() + " " + target.getOwner() + 
-                        //             " " + target.birthDate.toString();
-                        //         reveal.inform(description);
-                        //         reveal.inform("The animal knows the commands: " + 
-                        //         target.getCommands());
-                        //     }
-                        // }
                         } catch (Exception e) {
-                            offer.inform("adding a command is canceled.");
                             offer.prompt("the search is over. Press ENTER > ");
                         }
                         break;
@@ -118,12 +98,23 @@ public class Engine {
                             Animal pupil = search();
                             offer.inform("Here is an animal:");
                             offer.inform(pupil.toView());
-                            String newCommands = offer.prompt("Enter new commands => ");
-                            pupil.addCommand(newCommands);
-
-
+                            String baseCommands = pupil.getCommands().replace('|', ' ');
+                            String invitation = "Enter command(s) to teach -> ";
+                            String answer = "r";
+                            String updatedCommands = "";
+                            while(answer.equals("r") || answer.equals("R")) {
+                                updatedCommands = enterCommands(baseCommands, invitation);
+                                offer.inform("Commands will: " + updatedCommands);
+                                while(!answer.isEmpty() && 
+                                    (!answer.equals("R") || !answer.equals("r"))) {
+                                        answer = offer.prompt(
+                                            "Press ENTER to save or enter R to reassign -> ");
+                                    }
+                                }
+                                updatedCommands = updatedCommands.replace(' ', '|');
+                                pupil.setCommands(updatedCommands);
                         } catch(Exception e) {
-                            
+                            offer.inform("adding a commands is canceled.");
                         }
                     }
                     default:
@@ -220,6 +211,21 @@ public class Engine {
         }
         offer.inform("============================================");
         return serve.transform.reborn(targetLine);
+    }
+
+    public String enterCommands(String baseCommands, String invitation) {
+        if(baseCommands.equals("Live")) {
+            baseCommands = "";
+        }
+        String newCommands = offer.prompt(invitation);
+        newCommands = newCommands.trim();
+        if (baseCommands.isEmpty()) {
+            if (newCommands.isEmpty()) return "Live";
+            else baseCommands = newCommands;
+        } else if(!newCommands.isEmpty()) {
+            baseCommands += ", " + newCommands;
+        }
+        return baseCommands;
     }
 }
 

@@ -82,10 +82,6 @@ public class View {
         return getWords(invitation);
     }
 
-    public String enterCommands(String initialValue, String invitation) {
-        
-    }
-
     public void printList(List<String> target) {
         for(int i = 0; i < target.size(); i++) {
             String line = target.get(i).replace('|', ' ');
