@@ -1,7 +1,6 @@
-0 Pet Cat Pussy female 2015-02-23 Sit|Pounce
-2 PackAnimal Camel Smor  2012-05-17 Walk|CarryLoad
-3 PackAnimal Donkey Kozo male 2020-01-19 Walk|CarryLoad|Bray
-ЛяЛя ля ля ля
-4 Pet Cat Inessa female 2017-10-13 Scratch|Meow
-5 Pet Dog June femele 2011-07-07 Sit|Paw|Bark
-6 Pet Cat Inessa female 2018-11-26 Meow|Scratch|Jump
+0 Pet Cat Pussy female 2015-02-23 Sit,|Pounce
+2 PackAnimal Camel Smor  2012-05-17 Walk,|CarryLoad
+3 PackAnimal Donkey Kozo male 2020-01-19 Walk,|Carry|Load,|Bray
+4 Pet Cat Inessa female 2017-10-13 Scratch,|Meow
+5 Pet Dog June femele 2011-07-07 Sit,|Paw,|Bark
+6 Pet Cat Inessa female 2018-11-26 Meow,|Scratch,|Jump

@@ -11,7 +11,7 @@ import varieties.Animal;
 
 public class Collector {
     private DBConnector connector;
-    private DBTranslator translator;
+    public DBTranslator translator;
 
     public Collector () {
         connector = new DBConnector();
@@ -39,9 +39,9 @@ public class Collector {
         }
     }
 
-    public boolean saveList(List<String> lines, DBTranslator use) {
+    public boolean saveList(List<String> lines, DBTranslator use, boolean join) {
         try {
-            use.writeFile(lines, false);
+            use.writeFile(lines, join);
             return true;
         } catch (IOException e) {
             System.out.println("saving to a file failed");

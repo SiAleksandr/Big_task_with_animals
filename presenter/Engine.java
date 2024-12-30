@@ -105,23 +105,30 @@ public class Engine {
                             while(answer.equals("r") || answer.equals("R")) {
                                 updatedCommands = enterCommands(baseCommands, invitation);
                                 offer.inform("Commands will: " + updatedCommands);
+                                answer = "_";
                                 while(!answer.isEmpty() && 
-                                    (!answer.equals("R") || !answer.equals("r"))) {
+                                    (!answer.equals("R") && !answer.equals("r"))) {
                                         answer = offer.prompt(
                                             "Press ENTER to save or enter R to reassign -> ");
                                     }
                                 }
                                 updatedCommands = updatedCommands.replace(' ', '|');
                                 pupil.setCommands(updatedCommands);
+                                serve.saveNewCommand(pupil);
                         } catch(Exception e) {
-                            offer.inform("adding a commands is canceled.");
+                            offer.prompt("adding a commands is failed. Press ENTER > ");
                         }
+
+                        break;
                     }
                     default:
 
                         break;
             }     
         }
+    }
+    private Animal describeNewAnimal() {
+        
     }
     // private Integer getNumOfTipe (ArrayList<Animal> animalKinds,
     //         String descriptionForCancel, String invitation) {
@@ -166,6 +173,10 @@ public class Engine {
         int minValue = 0;
         String invitation = "Enter a number to search such type -> ";
         Integer typeNumber = offer.getValidNumber(invitation, minValue, lastOption);
+        if(typeNumber == 0) {
+            offer.inform("");
+            throw new Exception();
+        } 
         String typeTarget = numberedTypes[typeNumber - 1];
         List<String> sameType = serve.sameTypeSearch(typeTarget);
         if(sameType.size() == 0) {

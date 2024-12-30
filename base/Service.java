@@ -83,5 +83,7 @@ public class Service {
                 i = bigList.size();
             }
         }
+        boolean justAdd = false;
+        source.saveList(bigList, source.translator, justAdd);
     }
 }

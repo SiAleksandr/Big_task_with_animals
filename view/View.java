@@ -41,7 +41,7 @@ public class View {
 
     public int numberedTypesShow (String[] allTypes, String zeroNumberMessage) {
         int index = 0;
-        System.out.println(" " + index + " - " + zeroNumberMessage);
+        System.out.println("\n " + index + " - " + zeroNumberMessage);
         while (index < allTypes.length) {
             int numberForView = index + 1; 
             String description = " " + numberForView + " - " + allTypes[index];
