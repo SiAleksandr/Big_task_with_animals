@@ -51,6 +51,18 @@ public class View {
         return index;
     }
 
+    public String findTheType(String[] numberedTypes, String descriptionForCancel,
+                                String invitation) throws Exception {
+        int lastOption = numberedTypesShow(numberedTypes, descriptionForCancel);
+        int minValue = 0;
+        Integer typeNumber = getValidNumber(invitation, minValue, lastOption);
+        if(typeNumber == 0) {
+            inform("");
+            throw new Exception();
+        }
+        return numberedTypes[typeNumber - 1];
+    }
+
     public Integer getValidNumber (String invitation, int min, int max) {
         String input = prompt(invitation);
         if (isDigit(input)) {

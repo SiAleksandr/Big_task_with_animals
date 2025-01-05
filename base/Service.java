@@ -1,5 +1,6 @@
 package base;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,9 +37,24 @@ public class Service {
                 corruptedData.add(all.get(i));
             }
         }
-
     }
-    public void describeNewAnimal() {
+
+    public Long getNewId () {
+        Long max = 0l;
+        for(int i = 0; i < bigList.size(); i++) {
+            String[] elems = bigList.get(i).split(" ");
+            Long current = Long.parseLong(elems[0]);
+            if(max < current) {
+                max = current;
+            }
+        }
+        return max + 1;
+    }
+
+    public void addNewAnimal(Animal newAnimal) {
+        bigList.add(newAnimal.toString());
+        boolean justAdd = false;
+        source.saveList(bigList, source.translator, justAdd);
     }
 
     public List<String> sameTypeSearch (String typeName) {
@@ -85,5 +101,29 @@ public class Service {
         }
         boolean justAdd = false;
         source.saveList(bigList, source.translator, justAdd);
+    }
+
+    public String[] organize() {
+        LocalDate[] dates = new LocalDate[bigList.size()];
+        String[] indexes = new String[bigList.size()];
+        for(int i = 0; i < bigList.size(); i++) {
+            String[] line = bigList.get(i).split(" ");
+            dates[i] = LocalDate.parse(line[5]);
+            indexes[i] = String.valueOf(i);
+        }
+        int maxValid = dates.length - 1;
+        for(int n = 0; n < maxValid; n++) {
+            for(int k = 0; k < maxValid; k++) {
+                if(dates[k].isAfter(dates[k + 1])) {
+                    LocalDate temporarilyForDate = dates[k + 1];
+                    dates[k + 1] = dates[k];
+                    dates[k] = temporarilyForDate;
+                    String temporarilyForIndex = indexes[k + 1];
+                    indexes[k + 1] = indexes[k];
+                    indexes[k] = temporarilyForIndex;
+                }
+            }
+        }
+        return indexes;
     }
 }

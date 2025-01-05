@@ -13,6 +13,7 @@ import java.lang.Exception;
 
 import view.View;
 import varieties.Animal;
+import varieties.Informer;
 import varieties.groups.packAnimals.Camel;
 import varieties.groups.packAnimals.Donkey;
 import varieties.groups.packAnimals.Horse;
@@ -50,6 +51,23 @@ public class Engine {
         numberedTypes[5] = "Donkey";
     }
 
+    private Animal defineTheType (String typeName, Informer tipster) {
+        switch (typeName) {
+            case "Cat":
+                return new Cat(tipster);
+            case "Dog":
+                return new Dog(tipster);
+            case "Hamster": 
+                return new Hamster(tipster);
+            case "Horse":
+                return new Horse(tipster);
+            case "Camel":
+                return new Camel(tipster);
+            default:
+                return new Donkey(tipster);
+        }
+    }
+
     public void run () {
         offer.inform("\nstorage information:");
         if (!serve.start()) {
@@ -71,123 +89,152 @@ public class Engine {
             switch (choice) {
                 case 0: {
                     return;
-                }
+                    }
                 case 1: {
-                    // try {
-                    //     Animal target = describeNewAnimal();
-                    //     functional.addAnimal(target);
-                    // } catch (Exception e) {
-                    //     reveal.inform("adding a new animal is canceled");
-                    // }
+                    try {
+                        Animal target = describeNewAnimal();
+                        serve.addNewAnimal(target);
+                        offer.inform("=======================================");
+                        offer.inform("Added an animal like this:");
+                        offer.inform(target.toView());
+                        offer.prompt("Press ENTER > ");
+                    } catch (Exception e) {
+                        offer.prompt("adding a new animal is canceled. Press ENTER > ");
+                    }
                         break;
                     }
-                    case 2: {
-                        try {
-                            Animal target = search();
-                            offer.inform("Here is an animal:");
-                            offer.inform(target.toView());
-                            String commands = target.getCommands().replace('|', ' ');
-                            offer.prompt("COMMANDS (press ENTER): " + commands + " > ");
-                        } catch (Exception e) {
-                            offer.prompt("the search is over. Press ENTER > ");
-                        }
-                        break;
+                case 2: {
+                    try {
+                        Animal target = search();
+                        offer.inform("Here is an animal:");
+                        offer.inform(target.toView());
+                        String commands = target.getCommands().replace('|', ' ');
+                        offer.prompt("COMMANDS (press ENTER): " + commands + " > ");
+                    } catch (Exception e) {
+                        offer.prompt("the search is over. Press ENTER > ");
                     }
-                    case 3: {
-                        try {
-                            Animal pupil = search();
-                            offer.inform("Here is an animal:");
-                            offer.inform(pupil.toView());
-                            String baseCommands = pupil.getCommands().replace('|', ' ');
-                            String invitation = "Enter command(s) to teach -> ";
-                            String answer = "r";
-                            String updatedCommands = "";
-                            while(answer.equals("r") || answer.equals("R")) {
-                                updatedCommands = enterCommands(baseCommands, invitation);
-                                offer.inform("Commands will: " + updatedCommands);
-                                answer = "_";
-                                while(!answer.isEmpty() && 
-                                    (!answer.equals("R") && !answer.equals("r"))) {
-                                        answer = offer.prompt(
-                                            "Press ENTER to save or enter R to reassign -> ");
-                                    }
+                    break;
+                    }
+                case 3: {
+                    try {
+                        Animal pupil = search();
+                        offer.inform("Here is an animal:");
+                        offer.inform(pupil.toView());
+                        String baseCommands = pupil.getCommands().replace('|', ' ');
+                        String invitation = "Enter command(s) to teach -> ";
+                        String answer = "r";
+                        String updatedCommands = "";
+                        while(answer.equals("r") || answer.equals("R")) {
+                            updatedCommands = enterCommands(baseCommands, invitation);
+                            offer.inform("Commands will: " + updatedCommands);
+                            answer = "_";
+                            while(!answer.isEmpty() && 
+                                (!answer.equals("R") && !answer.equals("r"))) {
+                                    answer = offer.prompt(
+                                        "Press ENTER to save or enter R to reassign -> ");
                                 }
-                                updatedCommands = updatedCommands.replace(' ', '|');
-                                pupil.setCommands(updatedCommands);
-                                serve.saveNewCommand(pupil);
-                        } catch(Exception e) {
+                            }
+                            updatedCommands = updatedCommands.replace(' ', '|');
+                            pupil.setCommands(updatedCommands);
+                            serve.saveNewCommand(pupil);
+                    } catch(Exception e) {
                             offer.prompt("adding a commands is failed. Press ENTER > ");
-                        }
-
-                        break;
                     }
-                    default:
-
-                        break;
-            }     
+                    break;
+                    }
+                case 4: {
+                    offer.inform("");
+                    String[] pointers = serve.organize();
+                    for(int p = 0; p < pointers.length; p++) {
+                        int item = Integer.valueOf(pointers[p]);
+                        String current = serve.bigList.get(item);
+                        Informer informer = serve.transform.prepare(current);
+                        String[] data = current.split(" ");
+                        Animal animal = defineTheType(data[2], informer);
+                        offer.inform(animal.toView());
+                    }
+                    offer.prompt("Press ENTER > ");
+                    break;
+                    }           
+            }    
         }
     }
-    private Animal describeNewAnimal() {
-        
-    }
-    // private Integer getNumOfTipe (ArrayList<Animal> animalKinds,
-    //         String descriptionForCancel, String invitation) {
-    //     int lastNumber = reveal.numberedTypesShow(animalKinds, descriptionForCancel);
-    //     int minValid = 0;
-    //     Integer choice = reveal.getValidNumber(invitation, minValid, lastNumber);
-    //     return choice;
-    // }
 
-    // private LocalDate enterValidDate () throws Exception {
-    //     while(true) {
-    //         int minValue = 1;
-    //         int maxValue = 9999;
-    //         String current = "Enter the year of birth of this animal -> ";
-    //         Integer year = reveal.getValidNumber (current, minValue, maxValue);
-    //         maxValue = 12;
-    //         current = "Enter the month of birth as a number -> ";
-    //         Integer month = reveal.getValidNumber(current, minValue, maxValue);
-    //         maxValue = 31;
-    //         current = "Enter the day of the month -> ";
-    //         Integer dayOfMonth = reveal.getValidNumber(current, minValue, maxValue);
-    //         if (functional.source.toolkit.isDate(year, month, dayOfMonth)) {
-    //             LocalDate today = LocalDate.now();
-    //             LocalDate birthDate = LocalDate.of(year, month, dayOfMonth);
-    //             if ((birthDate.isBefore(today)) || (birthDate.isEqual(today))) {
-    //                 return birthDate;
-    //             }
-    //         }
-    //         reveal.inform("This date of birth are not real. Press Enter to add a valid date,");
-    //         String input = reveal.prompt("or type the letter Q to go the main menu -> ");
-    //         input = input.toUpperCase();
-    //         if (input.equals("Q")) {
-    //             throw new Exception();
-    //         }
-    //     }
-    // }
+    private Animal describeNewAnimal() throws Exception {
+        String descriptionForCancel = "Cancel";
+        String invitation = "Enter the type number -> ";
+        String typeTarget = offer.findTheType(numberedTypes, descriptionForCancel, invitation);
+        Long newId = serve.getNewId();
+        invitation = "Enter the animal`s name -> ";
+        String targetName = offer.getWords(invitation);
+        List <String> twoGenders = new ArrayList<>();
+        twoGenders.add("male");
+        twoGenders.add("female");
+        int maleNumber = 1;
+        int femaleNumber = 2;
+        offer.inform(" - " + maleNumber + " - " + twoGenders.get(maleNumber - 1));
+        offer.inform(" - " + femaleNumber + " - " + twoGenders.get(femaleNumber - 1));
+        invitation = "Which gender (enter it`s number) -> ";
+        int genderNumber = offer.getValidNumber(invitation, maleNumber, femaleNumber);
+        String targetGender = twoGenders.get(genderNumber - 1);
+        LocalDate targetBirthDate = enterValidDate();
+        invitation = "Animal executes commands (enter it) -> ";
+        String targetCommands = offer.prompt(invitation);
+        if(targetCommands.isEmpty()) {
+            targetCommands = "Live";
+        }
+        else {
+            targetCommands = targetCommands.replace(' ', '|');
+        }
+        Informer targetInformer = new Informer(newId, targetName, targetGender, 
+                                                targetBirthDate, targetCommands);
+        return defineTheType(typeTarget, targetInformer);
+    }
+
+    private LocalDate enterValidDate () throws Exception {
+        while(true) {
+            int minValue = 1;
+            int maxValue = 9999;
+            String current = "Enter the year of birth of this animal -> ";
+            Integer year = offer.getValidNumber (current, minValue, maxValue);
+            maxValue = 12;
+            current = "Enter the month of birth as a number -> ";
+            Integer month = offer.getValidNumber(current, minValue, maxValue);
+            maxValue = 31;
+            current = "Enter the day of the month -> ";
+            Integer dayOfMonth = offer.getValidNumber(current, minValue, maxValue);
+            if (serve.transform.check.IsDateElements(year, month, dayOfMonth)) {
+                LocalDate today = LocalDate.now();
+                LocalDate birthDate = LocalDate.of(year, month, dayOfMonth);
+                if ((birthDate.isBefore(today)) || (birthDate.isEqual(today))) {
+                    return birthDate;
+                }
+            }
+            offer.inform("This date of birth are not real. Press Enter to add a valid date,");
+            String input = offer.prompt("or type the letter Q to go the main menu -> ");
+            input = input.toUpperCase();
+            if (input.equals("Q")) {
+                throw new Exception();
+            }
+        }
+    }
 
     private Animal search() throws Exception {
         String  descriptionForCancel = "Cancel the search";
-        int lastOption = offer.numberedTypesShow(numberedTypes, 
-                                            descriptionForCancel);
-        int minValue = 0;
         String invitation = "Enter a number to search such type -> ";
-        Integer typeNumber = offer.getValidNumber(invitation, minValue, lastOption);
-        if(typeNumber == 0) {
-            offer.inform("");
-            throw new Exception();
-        } 
-        String typeTarget = numberedTypes[typeNumber - 1];
+        String typeTarget = offer.findTheType(numberedTypes, descriptionForCancel, invitation);
         List<String> sameType = serve.sameTypeSearch(typeTarget);
         if(sameType.size() == 0) {
             offer.inform("===========================================");
             offer.inform("there is not a single animal of this type yet.");
             throw new Exception();
         }
+        Informer informer;
         if(sameType.size() == 1) {
             offer.inform("=======================================");
             offer.inform("Only one animal.");
-            return serve.transform.reborn(sameType.get(0));
+            informer = serve.transform.prepare(sameType.get(0));
+            return defineTheType(typeTarget, informer);
         }
         offer.printList(sameType);
         invitation = "Enter the animal's name -> ";
@@ -201,7 +248,8 @@ public class Engine {
         }
         if(result.size() == 1){
             offer.inform("========================================");
-            return serve.transform.reborn(result.get(0));
+            informer = serve.transform.prepare(result.get(0));
+            return defineTheType(typeTarget, informer);
         }
         invitation = "Enter the ID of the animal -> ";
         String input;
@@ -221,7 +269,8 @@ public class Engine {
             }
         }
         offer.inform("============================================");
-        return serve.transform.reborn(targetLine);
+        informer = serve.transform.prepare(targetLine);
+        return defineTheType(typeTarget, informer);
     }
 
     public String enterCommands(String baseCommands, String invitation) {

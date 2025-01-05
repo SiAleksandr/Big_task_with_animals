@@ -38,31 +38,12 @@ public class Attachment {
         }
         return false;
     }
-    public Animal reborn (String line) {
+    public Informer prepare (String line) {
         String[] dataArray = line.split(" ");
         Long id = Long.parseLong(dataArray[0]);
         LocalDate birthDate = LocalDate.parse(dataArray[5]);
         Informer informer = new Informer(id, dataArray[3],
                 dataArray[4], birthDate, dataArray[6]);
-        String classType = dataArray[2];
-        switch (classType) {
-            case ("Cat"):
-                return new Cat(informer);
-
-            case ("Dog"):
-                return new Dog(informer);
-
-            case ("Hamster"):
-                return new Hamster(informer);
-
-            case ("Horse"):
-                return new Horse(informer);
-
-            case ("Camel"):
-                 return new Camel(informer);
-
-            default:
-            return new Donkey(informer);
-        }
+        return informer;
     }
 }
