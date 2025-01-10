@@ -1,12 +1,9 @@
 package view;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Map;
 
 import presenter.Engine;
-import varieties.Animal;
 
 public class View {
 
@@ -35,8 +32,9 @@ public class View {
         System.out.println(" 2. View commands executed by the animal");
         System.out.println(" 3. Teach the animal new command(s)");
         System.out.println(" 4. All animals by date of birth, starting from the oldest");
-        int lineCount = 4;
-        return lineCount;
+        System.out.println(" 5. The total number of animals");
+        int lastNumber = 5;
+        return lastNumber;
     }
 
     public int numberedTypesShow (String[] allTypes, String zeroNumberMessage) {

@@ -5,9 +5,6 @@ import base.util.dbAssistants.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import varieties.Animal;
 
 public class Collector {
     private DBConnector connector;
@@ -48,16 +45,4 @@ public class Collector {
             return false;
         }
     }
-
-    // public Integer setIdForNew (ArrayList<Animal> animalList, Animal item) {
-    //     Integer maxId = 0;
-    //     for (int a = 0; a < animalList.size(); a++) {
-    //         if (animalList.get(a).getGroupId() == item.getGroupId()) {
-    //             if (animalList.get(a).getId() > maxId) {
-    //                 maxId = animalList.get(a).getId() + 1;
-    //             }
-    //         }
-    //     }
-    //     return maxId;
-    // }
 }

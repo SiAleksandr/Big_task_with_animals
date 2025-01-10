@@ -4,13 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import base.Service;
-import base.util.Collector;
-
 import java.util.HashMap;
 import java.lang.Exception;
 
+import base.Service;
 import view.View;
 import varieties.Animal;
 import varieties.Informer;
@@ -88,6 +85,7 @@ public class Engine {
             Integer choice = offer.getValidNumber(invitationString, minMenuValue, linesNow);
             switch (choice) {
                 case 0: {
+                    serve.saveWithCorruptedData();
                     return;
                     }
                 case 1: {
@@ -155,7 +153,14 @@ public class Engine {
                     }
                     offer.prompt("Press ENTER > ");
                     break;
-                    }           
+                    }
+                case 5: {
+                    offer.inform("");
+                    Integer totalNumber = serve.bigList.size();
+                    offer.inform("Total: " + totalNumber);
+                    offer.prompt("Press ENTER > ");
+                    break;
+                }           
             }    
         }
     }
@@ -167,6 +172,7 @@ public class Engine {
         Long newId = serve.getNewId();
         invitation = "Enter the animal`s name -> ";
         String targetName = offer.getWords(invitation);
+        targetName = targetName.replace(' ', '|');
         List <String> twoGenders = new ArrayList<>();
         twoGenders.add("male");
         twoGenders.add("female");

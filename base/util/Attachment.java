@@ -1,19 +1,12 @@
 package base.util;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import varieties.*;
-import varieties.groups.pets.*;
-import varieties.groups.packAnimals.*;
 
 public class Attachment {
     public Check check;
-
 
     public Attachment() {
         check = new Check();

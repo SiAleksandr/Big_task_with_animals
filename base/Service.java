@@ -2,7 +2,6 @@ package base;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -125,5 +124,11 @@ public class Service {
             }
         }
         return indexes;
+    }
+    public void saveWithCorruptedData () {
+        boolean justAdd = false;
+        source.saveList(bigList, source.translator, justAdd);
+        justAdd = true;
+        source.saveList(corruptedData, source.translator, justAdd);
     }
 }

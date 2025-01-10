@@ -18,5 +18,4 @@ public class DBConnector {
     public static String getFileName() {
         return fileName;
     }
-    // System.out.println("An error occurred while file using.");
 }

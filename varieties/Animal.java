@@ -1,6 +1,5 @@
 package varieties;
 import java.time.LocalDate;
-import java.util.Map;
 
 public abstract class Animal {
     private Long id;
@@ -9,7 +8,6 @@ public abstract class Animal {
     private LocalDate birthDate;
     private String commands;
 
-    // public Animal(Long id, String name, LocalDate birthDate, String commands, Long seat) {
     public Animal(Informer one) {
         this.id = one.id;
         this.name = one.name;

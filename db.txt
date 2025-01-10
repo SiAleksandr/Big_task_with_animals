@@ -1,8 +1,16 @@
-0 Pet Cat Pussy female 2015-02-23 Sit,|Pounce
-2 PackAnimal Camel Smor  2012-05-17 Walk,|CarryLoad
-3 PackAnimal Donkey Kozo male 2020-01-19 Walk,|Carry|Load,|Bray
-4 Pet Cat Inessa female 2017-10-13 Scratch,|Meow
-5 Pet Dog June femele 2011-07-07 Sit,|Paw,|Bark
-6 Pet Cat Inessa female 2018-11-26 Meow,|Scratch,|Jump
-7 PackAnimal Camel Sahara female 2021-01-14 Live
-8 PackAnimal Donkey I-a male 1991-09-01 Cry,|Run
+0 Pet Dog Fido male 2020-01-01 Sit,|Stay,|Fetch
+1 Pet Cat Whiskers male 2019-05-15 Sit,|Pounce
+2 Pet Hamster Hammy male 2021-03-10 Roll,|Hide
+3 Pet Dog Buddy male 2018-12-10 Sit,|Paw,|Bark
+4 Pet Cat Smudge male 2020-02-20 Sit,|Pounce,|Scratch
+5 Pet Hamster Peanut male 2021-08-01 Roll,|Spin
+6 Pet Dog Bella female 2019-11-11 Sit,|Stay,|Roll
+7 Pet Cat Oliver male 2020-06-30 Meow,|Scratch,|Jump
+8 PackAnimal Horse Thunder male 2015-07-21 Trot,|Canter,|Gallop
+9 PackAnimal Camel Sandy male 2016-11-03 Walk,|Carry|Load
+10 PackAnimal Donkey Eeyore male 2017-09-18 Walk,|Carry|Load,|Bray
+11 PackAnimal Horse Storm male 2014-05-05 Trot,|Canter
+12 PackAnimal Camel Dune female 2018-12-12 Walk,|Sit
+13 PackAnimal Donkey Burro male 2019-01-23 Walk,|Bray,|Kick
+14 PackAnimal Horse Blaze male 2016-02-29 Trot,|Jump,|Gallop
+15 PackAnimal Camel Sahara female 2015-08-14 Walk,|Run
